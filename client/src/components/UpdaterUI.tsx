@@ -10,7 +10,10 @@ export default function UpdaterUI() {
     if (!api) return;
 
     const unsubMessage = api.onUpdaterMessage((data) => {
-      if (data.status === 'up-to-date') return;
+      if (data.status === 'up-to-date') {
+        setUpdateStatus(null);
+        return;
+      }
       setUpdateStatus(data);
       if (data.status === 'available' || data.status === 'checking') {
         setProgress(0);
@@ -31,6 +34,13 @@ export default function UpdaterUI() {
       unsubProgress();
     };
   }, []);
+
+  // If the updater never resolves (network hang), don't leave the banner stuck forever.
+  useEffect(() => {
+    if (updateStatus?.status !== 'checking') return;
+    const timeout = window.setTimeout(() => setUpdateStatus(null), 45000);
+    return () => window.clearTimeout(timeout);
+  }, [updateStatus?.status]);
 
   if (!updateStatus) return null;
 
