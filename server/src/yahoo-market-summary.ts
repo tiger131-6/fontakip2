@@ -1,6 +1,8 @@
 /**
- * Yahoo Finance chart API — market summary quotes (server-side proxy avoids browser CORS).
+ * Market summary quotes — Yahoo Finance for BIST/FX, Yapı Kredi for gram altın.
  */
+
+import { fetchGramGoldPrice, getPreviousGoldBuyPrice } from './gold-price';
 
 const YAHOO_CHART_BASE = 'https://query1.finance.yahoo.com/v8/finance/chart';
 const YAHOO_HEADERS = {
@@ -21,12 +23,11 @@ export interface MarketSummaryResult {
   fetchedAt: string;
 }
 
-const SUMMARY_SYMBOLS = [
+const YAHOO_SYMBOLS = [
   { key: 'bist' as const, symbol: 'XU100.IS' },
   { key: 'usd' as const, symbol: 'TRY=X' },
   { key: 'eur' as const, symbol: 'EURTRY=X' },
-  { key: 'gold' as const, symbol: 'GC=F' },
-];
+] as const;
 
 async function fetchYahooQuote(symbol: string): Promise<MarketSummaryQuote | null> {
   const url = `${YAHOO_CHART_BASE}/${encodeURIComponent(symbol)}?interval=1d&range=1d&_=${Date.now()}`;
@@ -57,10 +58,29 @@ async function fetchYahooQuote(symbol: string): Promise<MarketSummaryQuote | nul
   return { price: curr.toFixed(2), change };
 }
 
-/** BIST 100, USD/TRY, EUR/TRY, spot gold — parallel Yahoo chart fetch. */
+async function fetchGramGoldSummaryQuote(): Promise<MarketSummaryQuote | null> {
+  try {
+    const quote = await fetchGramGoldPrice();
+    const buyPrice = quote.buyPrice;
+    if (!Number.isFinite(buyPrice) || buyPrice <= 0) return null;
+
+    const today = quote.fetchedAt.slice(0, 10);
+    const prev = getPreviousGoldBuyPrice(today);
+    let change = 0;
+    if (prev != null && prev > 0) {
+      change = Number((((buyPrice - prev) / prev) * 100).toFixed(2));
+    }
+
+    return { price: buyPrice.toFixed(2), change };
+  } catch {
+    return null;
+  }
+}
+
+/** BIST 100, USD/TRY, EUR/TRY (Yahoo) + gram altın (Yapı Kredi). */
 export async function fetchMarketSummary(): Promise<MarketSummaryResult> {
-  const entries = await Promise.all(
-    SUMMARY_SYMBOLS.map(async ({ key, symbol }) => {
+  const yahooEntries = await Promise.all(
+    YAHOO_SYMBOLS.map(async ({ key, symbol }) => {
       try {
         const quote = await fetchYahooQuote(symbol);
         return [key, quote] as const;
@@ -70,6 +90,8 @@ export async function fetchMarketSummary(): Promise<MarketSummaryResult> {
     })
   );
 
+  const gold = await fetchGramGoldSummaryQuote();
+
   const result: MarketSummaryResult = {
     bist: null,
     usd: null,
@@ -78,9 +100,10 @@ export async function fetchMarketSummary(): Promise<MarketSummaryResult> {
     fetchedAt: new Date().toISOString(),
   };
 
-  for (const [key, quote] of entries) {
+  for (const [key, quote] of yahooEntries) {
     result[key] = quote;
   }
+  result.gold = gold;
 
   return result;
 }

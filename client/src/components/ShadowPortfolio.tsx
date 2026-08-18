@@ -40,16 +40,17 @@ const EMPTY_MARKET_DATA: MarketSummaryData = {
 };
 
 const MARKET_SUMMARY_SYMBOLS = [
-  { key: 'bist', symbol: 'XU100.IS', label: 'BIST 100' },
-  { key: 'usd', symbol: 'TRY=X', label: 'USD/TRY' },
-  { key: 'eur', symbol: 'EURTRY=X', label: 'EUR/TRY' },
-  { key: 'gold', symbol: 'GC=F', label: 'ONS ALTIN' },
+  { key: 'bist', label: 'BIST 100' },
+  { key: 'usd', label: 'USD/TRY' },
+  { key: 'eur', label: 'EUR/TRY' },
+  { key: 'gold', label: 'GRAM ALTIN' },
 ] as const;
 
-function formatMarketPrice(_key: keyof MarketSummaryData, price: string): string {
+function formatMarketPrice(key: keyof MarketSummaryData, price: string): string {
   const num = Number(price);
   if (!Number.isFinite(num)) return price;
-  return num.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const formatted = num.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return key === 'gold' ? `${formatted} ₺/gr` : formatted;
 }
 
 function changePctClass(change: number): string {

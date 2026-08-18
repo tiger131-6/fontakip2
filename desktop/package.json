@@ -1,7 +1,7 @@
 {
   "name": "fundtrack-desktop",
   "productName": "Fon Takip Programı",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fon Takip Programı masaüstü uygulaması (Electron).",
   "author": "Fon Takip Programı",
   "main": "main.js",

@@ -17,7 +17,7 @@
  *   GET  /api/market/tefas-historical-change/:ticker?range= -> TEFAS dönemsel getiri
  *   GET  /api/market/tefas-min-purchase/:ticker -> TEFAS min. alım limiti (Tutar/Miktar)
  *   GET  /api/market/bist100                    -> Mynet BIST 100 canlı hisse listesi
- *   GET  /api/market/summary                    -> Yahoo BIST/FX/altın piyasa özeti
+ *   GET  /api/market/summary                    -> Yahoo BIST/FX + Yapı Kredi gram altın özeti
  *   GET  /api/portfolio              -> holdings with live P&L
  *   POST /api/portfolio              -> add a buy transaction
  *   DELETE /api/portfolio/:id        -> remove a transaction
