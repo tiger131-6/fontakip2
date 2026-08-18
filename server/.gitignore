@@ -1,0 +1,6 @@
+node_modules/
+dist/
+funds.db
+funds.db-shm
+funds.db-wal
+*.log

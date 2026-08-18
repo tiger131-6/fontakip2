@@ -1,0 +1,44 @@
+==================================================
+  Fon Takip Programı — Kurulum Talimatı
+==================================================
+
+Merhaba! Bu uygulamayı bilgisayarına kurmak çok kolay.
+Sadece şu adımları sırayla takip et:
+
+1) Sana gönderilen dosyanın adı:
+       "Fon Takip Programı Setup 1.0.0.exe"
+   Bu dosyaya çift tıkla.
+
+2) Windows mavi bir uyarı gösterebilir:
+       "Windows bilgisayarınızı korudu"
+   Bu normaldir (uygulama dijital imzalı değil, zararlı değildir).
+   - "Daha fazla bilgi" (More info) yazısına tıkla.
+   - Sonra çıkan "Yine de çalıştır" (Run anyway) düğmesine tıkla.
+
+3) Kurulum penceresi açılır. "İleri / Kur (Install)" diyerek
+   devam et. Birkaç saniyede kurulur.
+
+4) Kurulum bitince masaüstünde ve Başlat menüsünde
+   "Fon Takip Programı" simgesi oluşur. Ona çift tıklayarak
+   uygulamayı her zaman açabilirsin.
+
+--------------------------------------------------
+KULLANIM
+--------------------------------------------------
+- Uygulama açılınca tüm fonları ve geçmiş fiyatlarını görürsün
+  (veriler uygulamanın içinde hazır gelir, internet gerekmez).
+- "Vergi Durumu" başlığına tıklayarak Vergisiz / Vergili
+  fonları süzebilirsin.
+- Bir fona tıklayınca fiyat grafiği ve tüm geçmiş açılır.
+- "En Güncel Fiyatı Çek (TEFAS)" düğmesi güncel fiyat için
+  internet kullanır (isteğe bağlı).
+
+--------------------------------------------------
+NOTLAR
+--------------------------------------------------
+- Kaldırmak istersen: Ayarlar > Uygulamalar > "Fon Takip Programı"
+  > Kaldır.
+- Bir sorun olursa şu dosyayı bana gönder:
+  C:\Users\<KULLANICI ADIN>\AppData\Roaming\Fon Takip Programı\startup.log
+
+İyi kullanımlar!

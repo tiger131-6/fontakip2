@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+client/dist/
+desktop/bundle/
+desktop/resources/
+desktop/installer/
+server/dist/
+
+# Local databases & logs
+server/funds.db
+server/funds.db-shm
+server/funds.db-wal
+*.log
+
+# Secrets
+.env
+.env.*
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.cursor/
+
+# Android build artifacts
+client/android/.gradle/
+client/android/app/build/
+client/android/build/
+client/android/.idea/
+*.apk
+
+# Large / generated binaries
+*.exe
+*.blockmap

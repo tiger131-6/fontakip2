@@ -1,0 +1,83 @@
+{
+  "name": "fundtrack-desktop",
+  "productName": "Fon Takip Programı",
+  "version": "1.0.0",
+  "description": "Fon Takip Programı masaüstü uygulaması (Electron).",
+  "author": "Fon Takip Programı",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "prepare:all": "node prepare.mjs",
+    "start": "npm run prepare:all && electron .",
+    "dist": "node scripts/rebuild-all.mjs",
+    "dist:quick": "node scripts/patch-app-builder.mjs && npm run prepare:all && electron-builder --win --x64",
+    "install:local": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-windows.ps1",
+    "postinstall": "node scripts/patch-app-builder.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.10.0",
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.7.1",
+    "electron": "^37.0.0",
+    "electron-builder": "^25.1.8",
+    "esbuild": "^0.24.0"
+  },
+  "build": {
+    "appId": "com.fundtrack.local",
+    "productName": "Fon Takip Programı",
+    "directories": {
+      "output": "installer"
+    },
+    "artifactName": "fundtrack-desktop-setup-${version}.${ext}",
+    "npmRebuild": false,
+    "forceCodeSigning": false,
+    "files": [
+      "**/*",
+      "!resources/**/*",
+      "!installer/**/*",
+      "!*.mjs",
+      "!.gitignore"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/client",
+        "to": "client"
+      },
+      {
+        "from": "resources/funds.seed.db",
+        "to": "funds.seed.db"
+      }
+    ],
+    "asarUnpack": [
+      "node_modules/better-sqlite3/**/*"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "signDlls": false,
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Fon Takip Programı"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "tiger131-6",
+        "repo": "fontakip2"
+      }
+    ]
+  }
+}

@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <meta name="description" content="">
+            <meta name="keywords" content="">
+
+    <meta name="author" content="">
+
+
+    
+
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WN6M978');
+    </script>
+
+
+    <script>
+        window['GoogleAnalyticsObject'] = 'ga';
+        window['ga'] = window['ga'] || function () {
+            (window['ga'].q = window['ga'].q || []).push(arguments)
+        };
+    </script>
+
+    <!-- End Google Tag Manager -->
+
+
+    <title>FON FİYATLARI</title>
+
+    <!-- MAIN CSS -->
+    <link href="/FonBulPlus/css/style.css?v=1.0.1.3" rel="stylesheet" />
+    <link href="/FonBulPlus/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="/FonBulPlus/plugin/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900&subset=latin-ext' rel='stylesheet' type='text/css' />
+    <link href="/FonBulPlus/css/site.css?v=17.3" rel="stylesheet" />
+
+        <link rel="shortcut icon" href="/FonBulPlus/images/Favicons/yatirimFavicon.ico">
+
+    <link href="/FonBulPlus/css/select.css" rel="stylesheet" />
+    <link href="/FonBulPlus/css/Typeahead.css" rel="stylesheet" />
+    <link href="/FonBulPlus/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/FonBulPlus/css/bootstrap-datepicker.css" rel="stylesheet" />
+    
+    <script src="/FonBulPlus/js/jquery-3.6.3.min.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript">
+        //web.config den ilgili url belirlenmelidir.
+        var FinnetStore = "https://www.finnet.com.tr/FinnetStore/tr/";
+        var FirmaLogo = "https://www.finnet.com.tr/FinnetStore/FirmaLogo/";
+        var haberAdet="1000";
+        var sayfaHaberAdedi=25;
+
+        var isGonullu = "307";
+        var isOks = "290";
+        var isYatirim = "94";
+
+        //web.config den ilgili url belirlenmelidir.
+        var Servisurl = "https://internalapi.finnet.com.tr/FonBulPlusServis/fonbul/tr";
+        var ServisHaberurl = "https://internalapi.finnet.com.tr/HaberExpertServisV2/fonbul";
+
+        //Fon Türü
+        var FonAnatipId=1;
+
+        //2 emekllik 1 yatırım
+        var RootID = 0;
+        if (FonAnatipId == 2)
+            RootID = 79;
+        else if (FonAnatipId == 1)
+            RootID = 127;
+
+        //var appUrlRoot = "";
+        var appUrlRoot ="/FonBulPlus";
+
+        var appUrl = appUrlRoot+ (FonAnatipId == 2 ? "/EmeklilikFonlari" : "/YatirimFonlari");
+
+        //Emeklilik ve yatırım fonları için ayrı. Kategori listesi yüklendiği yerde atanacak. Ana sayfada kullanıldı
+        var ROOTKATEGORIID = 0;
+
+        var IsLogin = false;
+        var demo = true;
+        var sessionKey = 'YtBTs2R0OjoluczSy3RxOCRWeoZH8NbMdmBzhRehc6gDLDIWeam9BFAGNc3ApBPlrVCtJtb5kcPxsvsz1sp6fY3m+XSF+kRKM/GR3jRyz3RGt6NjVHRxlEnQQhwbji0joLrx+GOk9rINsxXVnbLnIaAWkwYi55a8Kec7kUdi5ISpJuqLcTYTgRd4c+tPGP6tHeZSgbsIGbcR+otctrjjnfoEDgFeiEUnPZby8zWl+bYb6oM4jh40E23FgO9jzbSFC81m5ZJzTm43NFcGl668lyASKCgerP9tZRy6otW7dRZd4TlyRzZ5BvDSRofeJ3X/vrp0WrhCJmDU4YxsEdEhYCacln5lVGiJ+MNcCfSlOcjjvH6hxd2Gbfs1stZ73CtXQboQMoKl3eSCR4xiiLMVlqtd4DD67n5T0+wJg/EXFLA=';
+        var IsYatirim = true;
+        var IsEmeklilik = false;
+        var AnalizFonTur = "YatirimFonlari";
+        var secilenFon= "AAV";
+
+        $.ajaxSetup(
+            {
+                beforeSend: function (xhr, settings) {
+                    if (settings.url.indexOf("GetServisKey") !== -1) {
+                        return; // ignore
+                    }
+                    var sKey = GetServisKey();
+                    xhr.setRequestHeader("authorization-serviskey", sKey);
+                }
+            }
+        );
+    </script>
+
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1331220-1"></script>
+
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1331220-1');
+
+    </script>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+        <script src='https://www.google.com/recaptcha/api.js?onload=recaptchaOnload&render=explicit&hl=tr' async defer></script>
+    
+
+
+
+    <script src="/FonBulPlus/js/moment.min.js?v=17"></script>
+    
+    <script src="/FonBulPlus/js/moment-locale-tr.js"></script>
+    <script src="/FonBulPlus/js/bootstrap.min.js"></script>
+    <script src="/FonBulPlus/js/jquery-ui.js?v=1.0.0.1"></script>
+    <script src="/FonBulPlus/js/bootstrap-select.min.js"></script>
+    <script src="/FonBulPlus/js/bootstrap-multiselect.js"></script>
+    <script src="/FonBulPlus/js/bootstrap-multiselect-locale-tr.js"></script>
+    <script src="/FonBulPlus/js/bootstrap-datepicker.js?v=1.0.0.1"></script>
+    
+
+    <script src="/FonBulPlus/js/NumberFormat.js"></script>
+    <script src="/FonBulPlus/js/jquery.fancyboxe45f.js"></script>
+    <script src="/FonBulPlus/js/jquery.bootstrap-touchspin.js"></script>
+    <script src="/FonBulPlus/js/SiteScripts.js"></script>
+
+    <script type="text/javascript">
+        var LocalizationManager = LocalizationManager || {};
+
+    LocalizationManager.Culture = 'tr-TR';
+    LocalizationManager.Init = function Init() {
+LocalizationManager.PortfoyDegerAnalizi='Portföy Değer Analizi';
+LocalizationManager.PazarPaylariYardim='Pazar Payları Yardım Sayfası';
+LocalizationManager.Haziran='Haziran';
+LocalizationManager.FonHaberAramaTitle='Fon Haber Arama';
+LocalizationManager.DegerKazandiklari='kazandıkları';
+LocalizationManager.GrafikYardimSayfasi='Grafik Yardım Sayfası';
+LocalizationManager.PazarPaylari='Pazar Payları';
+LocalizationManager.karsilastirmaliFonGetirileri='Karşılaştırmalı Fon Getirileri (%)';
+LocalizationManager.BeniHatırla='Beni Hatırla';
+LocalizationManager.FonAylikGetiriYardimSayfasi='Fon Aylık Getiriler - Yardım Sayfası';
+LocalizationManager.FonPortfoyKuruculariYardimSayfasi='Fon Portföy Kurucuları Yardım Sayfası';
+LocalizationManager.FonKelimeAra='Arayın';
+LocalizationManager.TahvilBono='Tahvil / Bono';
+LocalizationManager.PortfoyYonetimiNedir='PORTFÖY YÖNETİMİ NEDİR ?';
+LocalizationManager.EmeklilikFonSiniflarindaArtisAzalis='Emeklilik Fon Sınıflarında Artış-Azalışlar';
+LocalizationManager.VadeliIslemlerNakitTeminatlariFiltreBaslik='Vadeli İşlemler Nakit Teminatları (%)';
+LocalizationManager.SerbestYatirimFonRehber='Serbest Yatırım Fon Rehberi';
+LocalizationManager.TeknikAnaliz='Teknik Analiz';
+LocalizationManager.YeniAcilanFonlarBaslik='YENİ AÇILAN FONLAR';
+LocalizationManager.EskiFonbul='Fonbul+ Emekliliki Satın Al';
+LocalizationManager.TarihAralikYatirimciTercihleri='Tarih Aralığı Yatırımcı Tercihleri';
+LocalizationManager.FonParaGirisCikisYardimSayfasi='Fon Para Giriş - Çıkış - Yardım Sayfası';
+LocalizationManager.FonBulunamadi='Fon Bulunamadı!';
+LocalizationManager.FKPortfoyDegerleri='FON KURUCULARININ PORTFÖY DEĞERLERİ';
+LocalizationManager.Hesaplaniyor='Hesaplanıyor...';
+LocalizationManager.Endeks='Endeks';
+LocalizationManager.SiteHaritasiK='Site Haritası';
+LocalizationManager.FonKurucularininPazarPaylari='Fon Kurucularının Pazar Payları';
+LocalizationManager.Eposta='E-posta :';
+LocalizationManager.RiskAnalizleri='Risk Analizleri';
+LocalizationManager.FYPortfoyDegerleri='FON YÖNETİCİ PORTFOY DEĞERLERİ';
+LocalizationManager.GetiriHaritasiYardim='Getiri Haritası Yardım Sayfası';
+LocalizationManager.YeniBolme='Yeni Bölme';
+LocalizationManager.FonPiyasasindaToplamBuyuklukler='Fon Piyasasında Toplam Büyüklükler';
+LocalizationManager.Urunler='Ürünler';
+LocalizationManager.YatirimFonlarindaBugun='YATIRIM FONLARINDA BUGÜN';
+LocalizationManager.TeknikAnalizModallarPath='/Modules/TeknikAnalizModallar.html';
+LocalizationManager.EndeksDegisimi='Endeksi Değişimi (%)';
+LocalizationManager.AktifDegereGore='Aktif Değere Göre';
+LocalizationManager.DegerlemeEsaslariPayFiyati='Değerleme Esasları ve Pay Fiyatı İlanı';
+LocalizationManager.YoneticiSirketveKurucuyaYonelikEkSart='Yönetici Şirkete ve Kurucuya Yönelik Getirilen Ek Şartlar';
+LocalizationManager.fonGetirileri='FON GETİRİLERİ (%)';
+LocalizationManager.Kazandirirken='kazandırırken';
+LocalizationManager.FonYoneticiPortfoyDegerleri='Fon Yönetici Portföy Değerleri';
+LocalizationManager.FonYoneticiler='Fon Yöneticileri';
+LocalizationManager.GunlukEnDusukEnYuksekOrtalamaGetirileri='Günlük En Düşük, En Yüksek ve Ortalama Getirileri';
+LocalizationManager.ReklamVer='REKLAM VER';
+LocalizationManager.Analiz='ANALİZ';
+LocalizationManager.FPYYonetitigiFonlarinToplamYS='Fon Portföy Yöneticilerinin Yönettiği Fonların Toplam Yatırımcı Sayıları';
+LocalizationManager.UyeGirisiModal='Üye Girişi';
+LocalizationManager.Aralik='Aralik';
+LocalizationManager.Azalis='azalış';
+LocalizationManager.Azaldi='azaldı';
+LocalizationManager.BYFGerekliDokumanlar='BORSA YATIRIM FONLARI KURULUŞUNDA GEREKLİ DOKÜMANLAR NELERDİR ?';
+LocalizationManager.FonPortfoyDegerleri='FON PORTFOY DEĞERLERİ';
+LocalizationManager.KollektifYatirimKuruslari='KOLLEKTİF YATIRIM KURULUŞLARI NEDİR ?';
+LocalizationManager.Finnet='FİNNET';
+LocalizationManager.FonAra='FON ARA';
+LocalizationManager.Fonbul='FONBUL';
+LocalizationManager.GetiriAltinda='altında';
+LocalizationManager.GuncelRaitinglerSection='GÜNCEL RATİNGLER - Finnet Bireysel Emeklilik Fonları Derecelendirmesi';
+LocalizationManager.TarihAralik='Tarih Aralık';
+LocalizationManager.SiteyeGit='Satın Al';
+LocalizationManager.Getiri='Getiriler';
+LocalizationManager.FonYillikGetiriYardimSayfasi='Fon Yıllık Getiriler - Yardım Sayfası';
+LocalizationManager.FonYatirimciTercihler='FON YATIRIMCI TERCİHLERİ';
+LocalizationManager.PYFPortfoyDagilimi='Portföylerini Yönettiği Fonların Portföy Dağılımı';
+LocalizationManager.Grafik='GRAFİK';
+LocalizationManager.Haftalik='Haftalık';
+LocalizationManager.FonAylikGetiri='Aylık Getiriler';
+LocalizationManager.Gunluk='Günlük';
+LocalizationManager.FonPortfoyYoneticileriYardim='Fon Portföy Yöneticileri Yardım Sayfası';
+LocalizationManager.EslesenKayitBulunamadi='Eşleşen Kayıt Bulunmadı';
+LocalizationManager.Destek='Destek';
+LocalizationManager.Digeri='Diğer';
+LocalizationManager.EmeklilikFonlariGonullu='Emeklilik Fonları (BES-Gönüllü)';
+LocalizationManager.fonGrupAnaliz='Fon Grup Analiz';
+LocalizationManager.FONBULHerHakkıSaklıdır='FONBUL. Her Hakkı Saklıdır.';
+LocalizationManager.YatirimFonlarinda='Yatırım Fonlarında';
+LocalizationManager.BISTEndeksleri='BİST Endeksleri';
+LocalizationManager.GrafikIcon='/images/grafikIcon.png';
+LocalizationManager.Balangic='Başlangıç';
+LocalizationManager.AradiginizFonBulunamadiUyari='Aradığınız FON bulunamadı. Fon kodunun doğruluğundan emin olunuz.';
+LocalizationManager.Grafikler='GRAFİKLER';
+LocalizationManager.FonBulAboneOlarakVerilereUlasabilirsiniz='FonBul Plusa abone olarak tüm verilere ulaşabilirsiniz.';
+LocalizationManager.IkiTarihArasiVerileriGetir='İki Tarih Arası Getiriler';
+LocalizationManager.KDBAraclari='K.D.B. Araçları';
+LocalizationManager.Haberler='HABERLER';
+LocalizationManager.BaslangicTarih='Başlangıç Tarih';
+LocalizationManager.Kucuktur='Küçüktür';
+LocalizationManager.HisseSenediFiltreBaslik='Hisse Senedi (Yabancı)(%)';
+LocalizationManager.Secildi='Seçildi';
+LocalizationManager.Seciniz='Seçiniz';
+LocalizationManager.BorsaYatirimFonu='BORSA YATIRIM FONU NEDİR ?';
+LocalizationManager.DigerFonlardanFarki='BORSA YATIRIM FONUNUN DİĞER FONLARDAN FARKLARI NELERDİR ?';
+LocalizationManager.FonRiskAnalizi='Fon Risk Analizleri';
+LocalizationManager.PortfoyDegereGore='Portföy Değere Göre';
+LocalizationManager.BesYildizliFonlarYatirimFonlariSection='BEŞ YILDIZLI FONLAR - SAHA Kurumsal Yatırım Fonları Derecelendirmesi';
+LocalizationManager.Sonraki='Sonraki';
+LocalizationManager.SonUcAy='Son 3 Ay';
+LocalizationManager.EurobondsFiltreBaslik='Eurobonds (%)';
+LocalizationManager.FonToplamBuyuklukler='Fon Toplam Büyüklükler';
+LocalizationManager.AltiAylik='6 Aylık';
+LocalizationManager.Onceki='Önceki';
+LocalizationManager.Persembe='Perşembe';
+LocalizationManager.SatinAl='Satın Al';
+LocalizationManager.FonDetayAnaliz='Fon Detay Analiz';
+LocalizationManager.PerformanUcretlendirmesi='Performans Ücretlendirmesi';
+LocalizationManager.RepoPiyasasi='Repo Piyasası';
+LocalizationManager.YatirimFonRehberi='YATIRIM FON REHBERİ';
+LocalizationManager.AnaKategori='Ana Kategori:';
+LocalizationManager.FonListesi='Fon Listesi';
+LocalizationManager.BesOksFonlar='(Bes-OKS)';
+LocalizationManager.FonYoneticiBilgi='Fon Yönetici Bilgileri';
+LocalizationManager.HerHakkiSaklidir='Her Hakkı Saklıdır';
+LocalizationManager.GununOzeti='Günün Özeti';
+LocalizationManager.YatirimciSayilari='Yatırımcı Sayıları';
+LocalizationManager.UcAylik='3 Aylık';
+LocalizationManager.FonVeriDagilimYuzdeleri='Dağılım Yüzdeleri';
+LocalizationManager.EmeklilikFonYonlendirme='Aradığınız fon bir Emeklilik Fonu olduğu için Emeklilik Fonlarına yönlendiriliyorsunuz.';
+LocalizationManager.DevletTahvil='Devlet Tahvili';
+LocalizationManager.Cekinceler='ÇEKİNCELER';
+LocalizationManager.HaberOzetleri='Haber Özetleri';
+LocalizationManager.Haklar='HAKLAR';
+LocalizationManager.EmeklilikFonRehberi='EMEKLİLİK FON REHBERİ';
+LocalizationManager.FonYatirimciTercihleri='Fon Yatırımcı Tercihleri';
+LocalizationManager.MilyarTL='Milyar TL';
+LocalizationManager.MilyonTL='Milyon TL';
+LocalizationManager.FonPiyasasi='FON PİYASASI';
+LocalizationManager.FiyatlamayaIliskinOrnekler='FİYATLAMAYA İLİŞKİN ÖRNEKLER';
+LocalizationManager.Varlik='Varlık';
+LocalizationManager.RaitinglerHakkinda='RATİNGLER HAKKINDA';
+LocalizationManager.PortfoyBuyuklugu='Portföy Büyüklüğü';
+LocalizationManager.Temizle='Temizle';
+LocalizationManager.TemaBtn='/images/temaIcon.png';
+LocalizationManager.GetiriHaritasiTitle='Getiri Haritası';
+LocalizationManager.FonPiyasasiToplamBuyuklukler='Fon Piyasasında Toplam Büyüklük';
+LocalizationManager.SiteMap='Site Haritası';
+LocalizationManager.Temmuz='Temmuz';
+LocalizationManager.YatirimcilaraIliskinKisitlar='Yatırımcılara İlişkin Kısıtlar';
+LocalizationManager.HataKodu='Hata Kodu';
+LocalizationManager.tumunuSec='Tümünü Seç';
+LocalizationManager.FonRaitingleri='FON RATİNGLERİ';
+LocalizationManager.EpostaModal='E-Posta';
+LocalizationManager.EpostaAdres='pazarlama@finnet.gen.tr';
+LocalizationManager.EmeklilikFonlarindaBugun='EMEKLİLİK FONLARINDA BUGÜN';
+LocalizationManager.Reklam='Reklam';
+LocalizationManager.Grafikk='Grafik';
+LocalizationManager.FonProfili='FON PROFİLİ';
+LocalizationManager.FonHaberYardimSayfasi='Fon Haber Yardım Sayfası';
+LocalizationManager.GirisimSermayesiYatirimFonlariKatilmaPaylariFiltreBaslik='Girişim Sermayesi Yatırım Fon Katılma Payları(%)';
+LocalizationManager.StartEndArasiKayit='_TOTAL_ Kayıttan _START_ - _END_ arası kayıtlar';
+LocalizationManager.Carsamba='Çarşamba';
+LocalizationManager.GayrimenkulYatirimFonlariKatilmaPaylariFiltreBaslik='Gayrimenkul Yatırım Fonları Katılma Payları (%)';
+LocalizationManager.EnAzBirYildirFaaliyetteBulunanYBEF='Derecelendirme faaliyetine, halka arz tarihinden itibaren en az 1 yıldır faaliyette bulunan Yatırım ve Bireysel Emeklilik Fonları söz konu edilir.';
+LocalizationManager.KiymetliMadenlerCinsindenIhracEdilenKamuBorclanmaAraclariFiltreBaslik='Kamu Borçlanma Araçları (Maden)(%)';
+LocalizationManager.EmeklilikFonlarinda='Emeklilik Fonlarında';
+LocalizationManager.EmeklilikFonlariOks='Emeklilik Fonları (BES-OKS)';
+LocalizationManager.FonParaGirisCikisTabloBaslik='Fona Para Girişi - Para Çıkışı Analizi';
+LocalizationManager.IkiTarihArasiPerformans='İki Tarih Arası Performans';
+LocalizationManager.Yillik='Yıllık';
+LocalizationManager.Yazdir='Yazdır';
+LocalizationManager.AnalizGetir='Analizi Getir';
+LocalizationManager.DonemlikGetiri='Dönemlik Getiriler';
+LocalizationManager.Filtreler='Filtreler';
+LocalizationManager.FonAnalizleri='FON ANALİZLERİ';
+LocalizationManager.DevamEtmekIcinTiklayiniz='Devam Etmek İçin Tıklayınız.';
+LocalizationManager.Referanslarimiz='Referanslarımız';
+LocalizationManager.JPEGOlarakIndir='JPEG olarak indir';
+LocalizationManager.FonBulPlusSatinAl='Fonbul+ Satın Al';
+LocalizationManager.AnaparaveGarantili='Anapara ve Garantili';
+LocalizationManager.RaitingiYukselenlerSection='RATİNGİ YÜKSELENLER - SAHA Kurumsal Bireysel Emeklilik Fonları Derecelendirmesi';
+LocalizationManager.FonSiniflarindaBugunYardimSayfasi='Fon Sınıflarında Bugün Yardım Sayfası';
+LocalizationManager.YatirimciTercihleri='YATIRIMCI TERCİHLERİ';
+LocalizationManager.OzelSektorDisBorclanmaAraclariFiltreBaslik='Özel Sektör Dış Borçlanma Araçları (%)';
+LocalizationManager.FonKurucusuSeciniz='Fon Kurucusu Seçiniz';
+LocalizationManager.PortfoyDegeri='Portföy Değeri';
+LocalizationManager.SVGOlarakIndir='SVG olarak indir';
+LocalizationManager.KiymetliMadenlerCinsindenBYFFiltreBaslik='Borsa Yatırım Fonları (Maden)(%)';
+LocalizationManager.SonBirHafta='Son 1 Hafta';
+LocalizationManager.HataBesYuz='Hata500';
+LocalizationManager.GuncelRaitingBYatirimEmeklilik='Güncel Ratingler - Finnet Yatırım Fonları Derecelendirmesi';
+LocalizationManager.YabanciBorclanmaAraclariFiltreBaslik='Borçlanma Aracı (Yabancı)(%)';
+LocalizationManager.FinnetHakkinda='Finnet Hakkında';
+LocalizationManager.KDFGetirileri='Kurucuya Dahil Fonların Getirileri';
+LocalizationManager.GayriMenkulSertifikaFiltreBaslik='Gayri Menkul Sertifika (%)';
+LocalizationManager.AboneOlmakIcinTiklayin='Abone olmak için buraya tıklayınız.';
+LocalizationManager.FonYoneticisiBireyselEmeklilik='Fon Yöneticisi - Finnet Bireysel Emeklilik Fonları Derecelendirmesi';
+LocalizationManager.SonUcYil='Son 3 Yıl';
+LocalizationManager.BesYildizliFonlarBireyselEmeklilikSection='BEŞ YILDIZLI FONLAR - SAHA Kurumsal Bireysel Emeklilik Fonları Derecelendirmesi';
+LocalizationManager.YakinlastirmayiSifirla='Yakınlaşmayı Sıfırla';
+LocalizationManager.KamuKiraSertifikalariTLFiltreBaslik='Kamu Kira Sertifikaları (TL)(%)';
+LocalizationManager.GetiriDegerleriYardimSayfasi='Getiri Değerleri Yardım Sayfası';
+LocalizationManager.EmeklilikFonListesi='Emeklilik Fon Listesi';
+LocalizationManager.SonBirAy='Son 1 Ay';
+LocalizationManager.FonToplamBuyukluklerYardimSayfasi='Fon Toplam Büyüklükler - Yardım Sayfası';
+LocalizationManager.Cumartesi='Cumartesi';
+LocalizationManager.FonFiyatlariYardimSayisi='Fon Fiyatları Yardım Sayfası';
+LocalizationManager.DegerKaybettikleri='kaybettikleri';
+LocalizationManager.FonListesiSayfaBaslik='FON LİSTESİ';
+LocalizationManager.Isleniyor='İşleniyor...';
+LocalizationManager.AnalizSayfasinaGit='Analiz Sayfasına Git';
+LocalizationManager.KatilmaHesabiDovizFiltreBaslik='Katılma Hesabı (Döviz)(%)';
+LocalizationManager.Periyot='Periyot';
+LocalizationManager.KurulusBilgileri='Kuruluş Bilgileri';
+LocalizationManager.FYPazarPaylari='FON YÖNETİCİ PAZAR PAYLARI';
+LocalizationManager.EmeklilikFonRehber='Emeklilik Fon Rehberi';
+LocalizationManager.DonemPerformansi='Dönem Performansı';
+LocalizationManager.FonPiyasasiVarlikDagilimYardim='Fon Piyasası Varlık Dağılımları - Yardım Sayfası';
+LocalizationManager.RaitingiYukselenlerYatirim='Ratingi Yükselenler - SAHA Kurumsal Yatırım Fonları Derecelendirmesi';
+LocalizationManager.EnDusukEnYuksekSection='EN DÜŞÜK, EN YÜKSEK';
+LocalizationManager.BYFIsleyisEsaslari='BORSA YATIRIM FONUNUN İŞLEYİŞ ESASLARI NELERDİR ?';
+LocalizationManager.FonTarihAralikGetiri='FON TARİH ARALIK GETİRİ';
+LocalizationManager.Yonlendirme='Yönlendirme';
+LocalizationManager.KurulusveKaydaAlmaSurecleri='Kuruluş ve Kayda Alma Süreçleri';
+LocalizationManager.YonlendirmeMesaji='Aradığınız fon bir Yatırım Fonu olduğu için Yatırım Fonlarına yönlendiriliyorsunuz.';
+LocalizationManager.RaporParametreleri='Rapor Parametreleri';
+LocalizationManager.FonPiyasalarindakiGelismeleriYakindanIzleyin='Tüm Yatırım ve Emeklilik Fonlarını en güncel verilerle ayrıntılı inceleyin.';
+LocalizationManager.TedavuldekiPayOrani='Tedavüldeki Pay Oranı';
+LocalizationManager.FonKurucularininPortfoyDegerleri='Fon Kurucularının Portföy Değerleri';
+LocalizationManager.Kaybettirirken='kaybettirirken';
+LocalizationManager.Dagilim='Dağılım';
+LocalizationManager.SatilabilirPayOrani='Satılabilir Pay Oranı';
+LocalizationManager.Piyasalar='Piyasalar';
+LocalizationManager.FonTarihAraligiGetiri='Fon Tarih Aralığı Getiri';
+LocalizationManager.yonetici='Yönetici';
+LocalizationManager.FonIstatistikYardimSayfasi='Fon İstatistik Yardım Sayfası';
+LocalizationManager.YatirimFonuaAitTemelBilgileriEldeEtme='BİR YATIRIM FONUNA AİT TEMEL BİLGİLER NASIL ELDE EDİLİR ?';
+LocalizationManager.TeknikAnalizSembol='Seçili Sembolü Kullan';
+LocalizationManager.KategoriBazindaGunlukGetiri='Kategori Bazında Günlük Getiri';
+LocalizationManager.DatePickerLanguage='tr';
+LocalizationManager.UyeGirisi='Üye Girişi';
+LocalizationManager.FonYillikGetiriSayfaBaslik='Fon Yıllık Getiriler';
+LocalizationManager.FonlarNasilDerecelendirilir='Fonlar Nasıl Derecelendiriliyor?';
+LocalizationManager.YFHakimTemelIlkeler='YATIRIM FONLARINA HAKİM OLAN TEMEL İLKELER NELERDİR ?';
+LocalizationManager.FonPiyasasiBuyuklukAnalizi='Fon Piyasası Büyüklük Analizi';
+LocalizationManager.TeknikAnalizUstBar='/Modules/TeknikAnalizUstBar-en.html';
+LocalizationManager.YatirimFonRehber='Yatırım Fon Rehberi';
+LocalizationManager.BPPKisaltma='B.P.P.';
+LocalizationManager.Degisim='Değişim';
+LocalizationManager.KimlerFonKurabilir='KİMLER FON KURABİLİR ?';
+LocalizationManager.FonOlcutGetirileri='Fon Ölçüt Getirileri';
+LocalizationManager.FonTarihAralikYatirimciTercihleri='Fon Tarih Aralığı Yatırımcı Tercihleri';
+LocalizationManager.FKPazarPaylari='FON KURUCULARININ PAZAR PAYLARI';
+LocalizationManager.FonVDMKFiltreBaslik='Varlığa Dayalı Menkul Kıymetler (%)';
+LocalizationManager.BesYildizliFonlar='Beş Yıldızlı Fonlar';
+LocalizationManager.FonFiyatTablosu='Fon Fiyat Tablosu';
+LocalizationManager.fonKuruculari='Fon Kurucuları';
+LocalizationManager.SerbestYatirimFonlari='Serbest Yatırım Fonları';
+LocalizationManager.YabanciFonGetiriSection='YABANCI FON GETİRİ';
+LocalizationManager.EkleBtn='/images/ekleIcon1.png';
+LocalizationManager.YabanciBorsaYatirimFonlariFiltreBaslik='Borsa Yatırım Fonları (Yabancı)(%)';
+LocalizationManager.KayitBulunmadi='Kayıt bulunamadı!';
+LocalizationManager.BesYildizliFonlarEmeklilikFonlari='Beş Yıldızlı Fonlar - SAHA Kurumsal Bireysel Emeklilik Fonları Derecelendirmesi';
+LocalizationManager.FonPiyasasinaParaGirisCikisAnaliz='Fon Piyasasına Para Giriş-Çıkış Analizi';
+LocalizationManager.KDFPortfoyDagilimi='Kurucuya Dahil Fonların Portföy Dağılımı';
+LocalizationManager.FonSeciniz='Fon Seçiniz';
+LocalizationManager.KiymetliMadenlerCinsindenIhracEdilenKamuKiraSertifikalariFiltreBaslik='Kamu Kira Sertifikaları (Maden)(%)';
+LocalizationManager.BorsaYatirimFonlariKatilmaPaylariFiltreBaslik='Borsa Yatırım Fonları Katılma Payları (%)';
+LocalizationManager.FonAraSite='Fon Ara';
+LocalizationManager.FonPortfoyDagilimi='Fon Portföy Dağılım';
+LocalizationManager.Sorumluluklar='SORUMLULUKLAR';
+LocalizationManager.FonGetirileriYardimSayfasi='Fon Getirileri Yardım Sayfası';
+LocalizationManager.FonYoneticiYatirimciSayilari='FON YÖNETİCİ YATIRIMCI SAYILARI';
+LocalizationManager.FonPortfoyDagilimlari='Fon Portföy Dağılımları';
+LocalizationManager.ucYillik='3 Yıllık';
+LocalizationManager.BaslangicTarihi='Başlangıç Tarihi:';
+LocalizationManager.YabanciOzelSektorBorclanmaAraclariFiltreBaslik='Özel Sektör Borçlanma Araçları (Yabancı)(%)';
+LocalizationManager.KriterlereUygunFonlar='KRİTERLERE UYGUN FONLAR';
+LocalizationManager.FinansmanBonoFiltreBaslik='Finansman Bonosu (%)';
+LocalizationManager.FKFonSayilarivePazarPaylari='Fon Kurucularının Fon Sayıları ve Pazar Payları';
+LocalizationManager.SiteHaritasi='SİTE HARİTASI';
+LocalizationManager.TarihSeciniz='Tarih Seçiniz.';
+LocalizationManager.GuncelRaitingBireyselEmeklilik='Güncel Ratingler - Finnet Bireysel Emeklilik Fonları Derecelendirmesi';
+LocalizationManager.ParametreAlmamaktadir='parametre almamaktadır.';
+LocalizationManager.T='T';
+LocalizationManager.fonGrupAnalizi='FON GRUP ANALİZİ';
+LocalizationManager.tl='TL';
+LocalizationManager.Ay='Ay';
+LocalizationManager.YB='YB';
+LocalizationManager.FonFiyatGrafigi='Fon Fiyat Grafiği';
+LocalizationManager.FonYoneticisiBireyselEmeklilikSection='FON YÖNETİCİSİ - Finnet Bireysel Emeklilik Fonları Derecelendirmesi';
+LocalizationManager.FonFiyat='FON FİYATLARI';
+LocalizationManager.FPYoneticiBilgileri='Fon Portföy Yöneticisi Bilgileri';
+LocalizationManager.FonKunye='FON KÜNYE';
+LocalizationManager.FonKarsilastirma='Fon Karşılaştır';
+LocalizationManager.FonHaber='Fon :';
+LocalizationManager.YatirimFonlari='Yatırım Fonları';
+LocalizationManager.KatilimHesabiFiltreBaslik='Katılım Hesabı (%)';
+LocalizationManager.HataDortYuzDort='Hata404';
+LocalizationManager.SonAltiAy='Son 6 Ay';
+LocalizationManager.fonKategori='Fon Kategori';
+LocalizationManager.SonBesYil='Son 5 Yıl';
+LocalizationManager.GetiriHaritasi='GETİRİ HARİTASI';
+LocalizationManager.PortfoyDagilimi='Portföy Dağılımı';
+LocalizationManager.MetodolojiTamamiOku='(Metodolojinin tamamını okumak için lütfen tıklayınız.)';
+LocalizationManager.HataGenel='Hata';
+LocalizationManager.SonBirYil='Son 1 Yıl';
+LocalizationManager.FonYoneticisiYardimSayfasi='Fon Yöneticisi Yardım Sayfası';
+LocalizationManager.FonKarsilastir='FON KARŞILAŞTIR';
+LocalizationManager.YatirimciSayisi='Yatırımcı Sayısı';
+LocalizationManager.ErisimIzniYok='Erişim İzni Yok!';
+LocalizationManager.KatilmaPaylariHangiFiyatUzerindenAlinipSatilir='KATILMA PAYLARI HANGİ FİYAT ÜZERİNDEN ALINIP SATILIR ?';
+LocalizationManager.FKYatirimciSayilari='FON KURUCULARININ YATIRIMCI SAYILARI';
+LocalizationManager.FonPiyasindaToplamBuyuklukler='Fon Piyasasında Toplam Büyüklükler';
+LocalizationManager.tarih='Tarih:';
+LocalizationManager.tamam='Tamam';
+LocalizationManager.kapat='Kapat';
+LocalizationManager.YabanciFonDetay='Yabancı Fon Detay';
+LocalizationManager.baz='Baz:';
+LocalizationManager.usd='USD';
+LocalizationManager.Eki='Eki';
+LocalizationManager.Eyl='Eyl';
+LocalizationManager.Agu='Ağu';
+LocalizationManager.Ara='ARA';
+LocalizationManager.Fon='Fon';
+LocalizationManager.Mln='Mln';
+LocalizationManager.Mlr='Mlr';
+LocalizationManager.May='May';
+LocalizationManager.Mar='Mar';
+LocalizationManager.Myr='Myr';
+LocalizationManager.Myn='Myn';
+LocalizationManager.Bin='Bin';
+LocalizationManager.Bul='Bul';
+LocalizationManager.Ilk='İlk';
+LocalizationManager.Nis='Nis';
+LocalizationManager.Oca='Oca';
+LocalizationManager.UcA='3A';
+LocalizationManager.Kas='Kas';
+LocalizationManager.Haz='Haz';
+LocalizationManager.Try='Try';
+LocalizationManager.Tel='Tel';
+LocalizationManager.Tem='Tem';
+LocalizationManager.Sub='Şub';
+LocalizationManager.Son='Son';
+LocalizationManager.Yil='Yıl';
+LocalizationManager.Eylul='Eylül';
+LocalizationManager.FonYoneticisi='Fon Yöneticisi';
+LocalizationManager.FonTuruNedir='FON TÜRÜ NEDİR ?';
+LocalizationManager.AltiA='6A';
+LocalizationManager.Artis='artış';
+LocalizationManager.Artti='arttı';
+LocalizationManager.Arajs='Ara';
+LocalizationManager.Aylik='Aylık';
+LocalizationManager.Fiyat='Fiyat';
+LocalizationManager.ALTIN='ALTIN';
+LocalizationManager.DOLAR='DOLAR';
+LocalizationManager.FonDonemselYatirimciTercihleri='Fon Dönemsel Yatırımcı Tercihleri';
+LocalizationManager.Donem='Dönem';
+LocalizationManager.Mayis='Mayis';
+LocalizationManager.HizliTeknikAnaliz='HIZLI TEKNİK ANALİZ';
+LocalizationManager.Bitis='Bitiş';
+LocalizationManager.Buljs='Bul:';
+LocalizationManager.FonPiyasalariYatirimcilarinaUlasma='Tüm Yatırım Fonlarını en güncel verilerle ayrıntılı inceleyin.';
+LocalizationManager.Nisan='Nisan';
+LocalizationManager.Login='ÜYE GİRİŞİ';
+LocalizationManager.Kasim='Kasım';
+LocalizationManager.Kunye='Künye';
+LocalizationManager.Hisse='Hisse';
+LocalizationManager.Hacim='Hacim';
+LocalizationManager.Haber='Haberler';
+LocalizationManager.YeniAcilanFonlar='Yeni Açılan Fonlar';
+LocalizationManager.Agustos='Ağustos';
+LocalizationManager.FonYillikGetiri='Yıllık Getiriler';
+LocalizationManager.Subat='Şubat';
+LocalizationManager.Sifre='Şifre';
+LocalizationManager.FonKurucularininYatirimciSayilari='Fon Kurucularının Yatırımcı Sayıları';
+LocalizationManager.Pazar='Pazar';
+LocalizationManager.AybasindanBugune='Aybaşından Bugüne';
+LocalizationManager.TurevAraclariFiltreBaslik='Türev Araçları (%)';
+LocalizationManager.NitelikliYatirimcilaraYonelikBilgiler='Nitelikli Yatırımcılara Yönelik Periyodik Bilgilendirme';
+LocalizationManager.HazineBono='Hazine Bonosu';
+LocalizationManager.secimleriKaldir='Seçimleri Kaldır';
+LocalizationManager.KatilmaHesabiTLFiltreBaslik='Katılma Hesabı (TL)(%)';
+LocalizationManager.Yukleniyor='Yükleniyor...';
+LocalizationManager.FonYoneticisiYatirimFonlariSection='FON YÖNETİCİSİ - Finnet Yatırım Fonları Derecelendirmesi';
+LocalizationManager.GunlukGetiri='Günlük Getiri (%)';
+LocalizationManager.FonlardaBugun='FONLARDA BUGÜN';
+LocalizationManager.FinneteUlas='Fon Rating Sonuçlarını, Kurumsal Web Sitelerinizde, Raporlarınızda ve Medyada Kullanabilmek İçin Finnete';
+LocalizationManager.FonHaberDetayTitle='Fon Haber Detay';
+LocalizationManager.FonTarihAraligiGetiriYardim='Fon Tarih Aralığı Getiri Yardım Safyası';
+LocalizationManager.EnCokDusenFonlar='En Çok Düşen Fonlar';
+LocalizationManager.FonPortfoyYoneticileri='Fon Portföy Yöneticileri';
+LocalizationManager.YilbasindanItibaren='Yılbaşından İtibaren';
+LocalizationManager.FonbulPlusaReklamVerin='Fonbul+ Yatırımı Satın Al';
+LocalizationManager.Pazartesi='Pazartesi';
+LocalizationManager.UyeGirisUyari='Aradığınız FONa a ait verileri görüntüleyebilmek için Üye Girişi yapmanız gerekmektedir.';
+LocalizationManager.MetodolojiTitle='Finnet Fon Rating Metodolojisi';
+LocalizationManager.FonGrupAnaliziTitle='Fon Grup Analizi';
+LocalizationManager.DonemselYatirimciTercihleri='DÖNEMSEL YATIRIMCI TERCİHLERİ';
+LocalizationManager.KatilmaHesabiAltinFiltreBaslik='Katılma Hesabı (Altın)(%)';
+LocalizationManager.EnCokYukselenFonlar='En Çok Yükselen Fonlar';
+LocalizationManager.SilinsinMi='silinsin mi?';
+LocalizationManager.Buyuktur='Büyüktür';
+LocalizationManager.KatilmaPayiFiyatiNasilOgrenilir='KATILMA PAYININ FİYATI NASIL ÖĞRENİLİR ?';
+LocalizationManager.AsgariAlimSatimLimiti='Asgari Alım ve Satım Limiti';
+LocalizationManager.FPYFonSayilarivePazarPayi='Fon Portföy Yöneticilerinin Fon Sayıları ve Pazar Payları';
+LocalizationManager.FonFiyatlari='Fon Fiyatları';
+LocalizationManager.KunyeBuyuk='KÜNYE';
+LocalizationManager.analiziGetir='Analizi Getir';
+LocalizationManager.FonPortfoyKuruculari='Fon Portföy Kurucuları';
+LocalizationManager.GuncelRaitinglerYardimSayfasi='Güncel Ratingler Yardım Sayfası';
+LocalizationManager.Analizk='Analiz';
+LocalizationManager.FonYoneticiPazarPaylari='Fon Yönetici Pazar Payları';
+LocalizationManager.degerlemeGunu='Değerleme Günü';
+LocalizationManager.FonGrafik='FON GRAFİK';
+LocalizationManager.PortfoydekiYatirimAraclarininDagilimininDegisimi='Portföydeki Yatırım Araçlarının Dağılımının Değişimi';
+LocalizationManager.FonKurucuAnaliz='Fon Kurucu Analiz';
+LocalizationManager.DusenFonlar='DÜŞEN FONLAR';
+LocalizationManager.RaitingiYukselenlerBaslik='Ratingi Yükselenler - SAHA Kurumsal Bireysel Emeklilik Fonları Derecelendirmesi';
+LocalizationManager.YabanciFonDetaySection='YABANCI FON DETAY';
+LocalizationManager.FonToplamBuyukluklerTabloBaslik='Fon Büyüklük Analizi';
+LocalizationManager.PNGOlarakIndir='PNG Olarak indir';
+LocalizationManager.FonSiniflarindaBugunk='Fon Sınıflarında Bugün';
+LocalizationManager.VeriPriyodu='Veri Periyodu';
+LocalizationManager.FonAnaliz='FON ANALİZ';
+LocalizationManager.FonAraBul='FON ARA BUL';
+LocalizationManager.BesGonulluFonlar='(Bes-Gönüllü)';
+LocalizationManager.PortfoyDegisimi='Portföy Değişimi (%)';
+LocalizationManager.YatirimFomSiniflarindaArtisAzalis='Yatırım Fon Sınıflarında Artış-Azalışlar';
+LocalizationManager.RaitingiYukselenlerYardimSayfasi='Ratingi Yükselenler Yardım Sayfası';
+LocalizationManager.FonVeriHakkinda='Fon Veri Hakkında';
+LocalizationManager.FonDolulukOranlar='FON DOLULUK ORANLARI';
+LocalizationManager.KayitYok='Kayıt Yok';
+LocalizationManager.HemenUlas='Hemen Ulaşın';
+LocalizationManager.FonAraBulTitle='Fon Ara Bul';
+LocalizationManager.FonPortfoyDegerleriTitle='Fon Portföy Değerleri';
+LocalizationManager.KunyeBaslik='Künye';
+LocalizationManager.FonHaberler='FON HABERLER';
+LocalizationManager.ReklamVerin='Satın Al';
+LocalizationManager.BasindaFinnet='Basında Finnet';
+LocalizationManager.BankaBonoFiltreBaslik='Banka Bonosu (%)';
+LocalizationManager.YatirimFonlarininGetirdigiMaliyetler='YATIRIM FONLARININ GETİRDİĞİ MALİYETLER NELERDİR ?';
+LocalizationManager.FonKurucu='Fon Kurucu';
+LocalizationManager.FonDolulukOranlariYardimSayfasi='Fon Doluluk Oranları Yardım Sayfası';
+LocalizationManager.DagitimKanallariReklamveIlanlar='Dağıtım Kanalları ile Reklam ve İlanlar';
+LocalizationManager.YatirimAmacivePolitikasi='Yatırım Amacı ve Politikası';
+LocalizationManager.YatirimFonlariKatilmaPaylariFiltreBaslik='Yatırım Fonları Katılma Payları (%)';
+LocalizationManager.MevduatDovizFiltreBaslik='Mevduat (Döviz)(%)';
+LocalizationManager.fonEndeksGetiriler='FON ENDEKS GETİRİLER';
+LocalizationManager.DonemselYatirimciTercihler='Dönemsel Yatırımcı Tercihleri';
+LocalizationManager.GetirilerSiteHaritasi='Getiriler';
+LocalizationManager.FonYoneticiBilgileri='FON YÖNETİCİ BİLGİLERİ';
+LocalizationManager.FonYoneticisiYatirimFonlari='Fon Yöneticisi - Finnet Yatırım Fonları Derecelendirmesi';
+LocalizationManager.FonBulPlusHizliTeknikAnaliz='FonBul Plus-Hızlı Teknik Analiz';
+LocalizationManager.YilbasindanBugune='Yılbaşından Bugüne';
+LocalizationManager.FKTYatirimciSayilari='Fon Kurucularının Toplam Yatırımcı Sayıları';
+LocalizationManager.FonRaiting='FON RATİNG';
+LocalizationManager.EskiFonuKullanabilmekIcinTiklayin='Tüm Emeklilik Fonlarını en güncel verilerle ayrıntılı inceleyin.';
+LocalizationManager.SayfaBulunamadi='Sayfa Bulunamadı!';
+LocalizationManager.BorsaYatirimFonuKavramlari='BORSA YATIRIM FONU İLE İLGİLİ KAVRAMLAR NELERDİR ?';
+LocalizationManager.BesYildizliFonlarYardimSayfasi='Beş Yıldızlı Fonlar Yardım Sayfası';
+LocalizationManager.FonRepoFiltreBaslik='Fon Repo (%)';
+LocalizationManager.FonOlcutu='Fon Ölçütü';
+LocalizationManager.FonPiyasasinaParaGirisCikis='Fon Piyasasına Para Giriş-Çıkış';
+LocalizationManager.FonPortfoyAnalizleriYardim='Fon Portföy Analizleri Yardım Sayfası';
+LocalizationManager.YatirimFonuNedir='YATIRIM FONU NEDİR ?';
+LocalizationManager.KamuOzelSektorYurtDisiKiraSertifikalariFiltreBaslik='Kamu Özel Sektör Yurt Dışı Kira Sertifikaları (%)';
+LocalizationManager.FonGetiriHaritasi='Fon Getiri Haritası';
+LocalizationManager.FonPiyasasindaToplamBuyukluklerYardim='Fon Piyasasında Toplam Büyüklükler Yardım Sayfası';
+LocalizationManager.RatinglerHakkinda='Ratingler Hakkında';
+LocalizationManager.karsilastirmaliFEGetirileri='Karşılaştırmalı Fon Endeks Getirileri';
+LocalizationManager.MevduatAltinFiltreBaslik='Mevduat (Altın)(%)';
+LocalizationManager.GuncelRaitinglerSectionYatirimFonlari='GÜNCEL RATİNGLER - Finnet Yatırım Fonları Derecelendirmesi';
+LocalizationManager.YorumunTamamiIcinTiklayin='Yorumun tamamı için tıklayınız';
+LocalizationManager.YatirimFonListesi='Yatırım Fon Listesi';
+LocalizationManager.YBEFDerecelendirmesiNedir='SAHA Yatırım ve Bireysel Emeklilik Fonları Derecelendirmesi Nedir?';
+LocalizationManager.KurumKodu='Kurum Kodu (Kurumsal Kullanıcılar için)';
+LocalizationManager.FonHaberk='Fon Haber';
+LocalizationManager.FonHaberi='FON HABER';
+LocalizationManager.KamuYurtDisiKiraSertifikalariFiltreBaslik='Kamu Yurt Dışı Kira Sertifikaları (%)';
+LocalizationManager.ErisimIzniHata='Üzgünüz,Talep ettiğiniz dizine erişim izniniz yok. Dizin ya okumaya karşı korumalı yada sunucu tarafından okunamıyor.Ana sayfaya dönmek için lütfen aşağıdaki butonu tıklayınız.';
+LocalizationManager.KurucuHaber='Kurucu :';
+LocalizationManager.StratejiBilgileri='Strateji Bilgileri';
+LocalizationManager.YoneticiHaber='Yönetici :';
+LocalizationManager.BizeUlasin='Bize Ulaşın';
+LocalizationManager.OSBorcSenedi='Ö.S.Borç Senedi';
+LocalizationManager.FonSayisi='Fon Sayısı';
+LocalizationManager.FonPerformansOlculeri='Performans Ölçüleri';
+LocalizationManager.DovizOdemeliBonoFiltreBaslik='Döviz Ödemeli Bono (%)';
+LocalizationManager.FonPiyasasiVarlikDagilim='Fon Piyasası Varlık Dağılımları';
+LocalizationManager.GenelHata='Genel Hata';
+LocalizationManager.fonFiyati='Fon Fiyatı';
+LocalizationManager.FonlarindaBugun='FONLARINDA BUGÜN';
+LocalizationManager.FonYonetici='Fon Yönetici';
+LocalizationManager.FonDolulukOranlari='Fon Doluluk Oranları';
+LocalizationManager.AnalizYardimSayfasi='Analiz Yardım Sayfası';
+LocalizationManager.BilgiTalep='Bilgi Talep';
+LocalizationManager.EmeklilikFonlari='Emeklilik Fonları';
+LocalizationManager.Kapanis='Kapanış';
+LocalizationManager.FonRiskAnalizleri='FON RİSK ANALİZLERİ';
+LocalizationManager.fonKriter='Fon Kriter';
+LocalizationManager.HukukiSartlar='Hukuki Şartlar';
+LocalizationManager.PortfoydekiYatirimAraclarininDegisimi='Portföydeki Yatırım Araçlarının Dağılımının Değişimi';
+LocalizationManager.SunucuUygulamaHata='Üzgünüz, aradığınız kaynak ile ilgili bir sorun oluştu. Ana sayfaya dönmek için lütfen aşağıdaki butonu tıklayınız.';
+LocalizationManager.YabanciFonYillikTablo='Yabancı Fon Yıllık Tablo';
+LocalizationManager.SayfadaMenuKayitGoster='Sayfada _MENU_ Kayıt göster';
+LocalizationManager.RaitingiYukselenlerKurumsalYatirimFOnlariSection='RATİNGİ YÜKSELENLER - SAHA Kurumsal Yatırım Fonları Derecelendirmesi';
+LocalizationManager.IcerikKisitliGosterilmektedir='İçerik kısıtlı gösterilmektedir.';
+LocalizationManager.gecerliOlduguGune='Geçerli Olduğu Güne';
+LocalizationManager.AnaSayfa='Ana Sayfa';
+LocalizationManager.MevduatTLFiltreBaslik='Mevduat (TL)(%)';
+LocalizationManager.YatirimFonlariAvantajlari='YATIRIM FONLARI NE GİBİ AVANTAJLAR SAĞLAMAKTADIR ?';
+LocalizationManager.PYFPortfoyGetirileri='Portföylerini Yönettiği Fonların Getirileri';
+LocalizationManager.YabanciMenkulKiymetler='Yab.Men. Kıymet';
+LocalizationManager.SerbestYatirimFonRehberi='SERBEST YATIRIM FON REHBERİ';
+LocalizationManager.KiymentliMadenY='Kıymetli Maden %';
+LocalizationManager.YardimSayfasinaGit='Yardım Sayfasına Git';
+LocalizationManager.YabanciKamuBorclanmaAraclariFiltreBaslik='Kamu Borçlanma Araçları (Yabancı)(%)';
+LocalizationManager.KelimeFonAraBulTitle='Fon veya analiz arayın';
+LocalizationManager.UyeGirisiIcinTiklayiniz='Üye Girişi için Tıklayınız.';
+LocalizationManager.KamuKiraSertifikalariDovizFiltreBaslik='Kamu Kira Sertifikaları (Döviz)(%)';
+LocalizationManager.BitisTarih='Bitiş Tarih:';
+LocalizationManager.HaberArama='Haber Arama';
+LocalizationManager.FonRehberleri='Fon Rehberleri';
+LocalizationManager.KollektifFonRehberi='KOLLEKTİF YATIRIM KURULUŞLARI NEDİR ?';
+LocalizationManager.HaberGetir='Haber Getir';
+LocalizationManager.FonBulunamadiTitle='Fon Bulunamadı';
+LocalizationManager.SifremiUnuttum='Şifremi Unuttum';
+LocalizationManager.VadeliMevduatFiltreBaslik='Vadeli Mevduat (%)';
+LocalizationManager.YatirimOrtakligi='Yatırım Ortaklığı';
+LocalizationManager.FonPortfoyDagilim='FON PORTFÖY DAĞILIM';
+LocalizationManager.HaftabasindanBugune='Haftabaşından Bugüne';
+LocalizationManager.RaitingiYukselenler='Ratingi Yükselenler';
+LocalizationManager.KurumsalCozumler='Kurumsal Çözümler';
+LocalizationManager.fonYoneticileri='Fon Yöneticileri:';
+LocalizationManager.FonYoneticiYatirimciSayilariTitle='Fon Yönetici Yatırımcı Sayıları';
+LocalizationManager.PortfoyDegerleriToplami='Portföy Değerleri Toplamı';
+LocalizationManager.AritmetikOrt='Aritmetik Ort.';
+LocalizationManager.PortfoyeAlinabilecekVarliklarveIslemler='Portföye Alınabilecek Varlıklar ve Yapılabilecek İşlemler';
+LocalizationManager.Metodoloji='FİNNET FON RATİNG METODOLOJİSİ';
+LocalizationManager.EnDusukEnYuksek='En Düşük, En Yüksek';
+LocalizationManager.SonFiyatBilgileri='Son Fiyat Bilgileri -';
+LocalizationManager.CekincelerTitle='Çekinceler';
+LocalizationManager.DovizCinsiKamuIcBorclanmaAraclariFiltreBaslik='Kamu İç Borçlanma Araçları (Döviz)(%)';
+LocalizationManager.SayfaBulunamadiHata='Üzgünüz, ulaşmaya çalıştığınız sayfayı bulamadık. Dilerseniz aşağıdaki buton ile ana sayfaya dönebilirsiniz.';
+LocalizationManager.FonAylikGetiriSayfaBaslik='Fon Aylık Getiriler';
+LocalizationManager.TabloBasliklari='Tablo Başlıkları';
+LocalizationManager.YukselenFonlar='YÜKSELEN FONLAR';
+LocalizationManager.FonNasilgelirGetirir='FON NASIL GELİR GETİRİR ?';
+LocalizationManager.YatirimciTercihleriYardim='YatirimciTercihleri';
+LocalizationManager.SunucuUygulamaHatasi='Sunucu Uygulama Hatası';
+LocalizationManager.YatirimciTercihler='Yatırımcı Tercihleri';
+LocalizationManager.FonHaberDetay='FON HABER DETAY';
+LocalizationManager.FonHaberArama='FON HABER ARAMA';
+LocalizationManager.FonGetirisi='Fon Getirileri';
+LocalizationManager.HisseSenedi='Hisse Senedi';
+LocalizationManager.KatilmaPayiNedir='KATILMA PAYI NEDİR ?';
+LocalizationManager.KatilmaPaylarininKaydenIzlenmesi='KATILMA PAYLARININ KAYDEN İZLENMESİ';
+LocalizationManager.VeriAdedi='Veri Adedi';
+LocalizationManager.dolulukOranlari='Doluluk Oranları';
+LocalizationManager.VeriTarih='VeriTarih';
+LocalizationManager.YatirimFonlariNerelereYatirimYapabilir='YATIRIM FONLARI NERELERE YATIRIM YAPABİLİR ?';
+LocalizationManager.GetiriUzerinde='üzerinde';
+LocalizationManager.FonHaberleri='Fon Haberleri';
+LocalizationManager.DolulukOraniYuzde='Doluluk Oranı (%)';
+LocalizationManager.FonYoneticisiSeciniz='Fon Yöneticisi Seçiniz';
+LocalizationManager.DovizeOdemeliTahvilFiltreBaslik='Döviz Ödemeli Tahvil (%)';
+LocalizationManager.FinneteHemenUlas='Fon Rating Sonuçlarını, Kurumsal Web Sitelerinizde, Raporlarınızda ve Medyada Kullanabilmek İçin Finnete Hemen Ulaşın';
+LocalizationManager.KunyeYardimSayfasi='Künye Yardım Sayfası';
+LocalizationManager.RiskAnalizleriYardimSayfasi='Risk Analizleri Yardım Sayfası';
+LocalizationManager.FonParaGirisCikis='Fon Para Giriş - Çıkış';
+LocalizationManager.FonAramaMotoru='Fon Arama Motoru';
+LocalizationManager.FonKurucuDetay='FON KURUCU DETAYI';
+LocalizationManager.TumuSecildi='Tümü Seçildi';
+LocalizationManager.FonSiniflarindaBugun='FON SINIFLARINDA BUGÜN';
+LocalizationManager.KatilmaPayiFiyatlariNasilHesaplanir='KATILMA PAYLARININ FİYATLARI NASIL HESAPLANIR ?';
+LocalizationManager.BYFKaydaAlinmasiGereknDokuman='BORSA YATIRIM FONLARI KAYDA ALINMASINDA GEREKLİ DOKÜMANLAR NELERDİR ?';
+LocalizationManager.KamuKiraSertifikaY='Kamu Kira Sertifika %';
+LocalizationManager.Performansi='Performansı';
+LocalizationManager.GetiriDegerleri='Getiri Değerleri';
+LocalizationManager.MaxKayitIcerisindeBulunan='( _MAX_ Kayıt içerisinden bulunan)';
+LocalizationManager.FonPortfoyunuKimYonetir='FON PORTFÖYÜNÜ KİM YÖNETİR ?';
+LocalizationManager.FonAraYardimSayfasi='FON ARA YARDIM SAYFASI';
+LocalizationManager.FPYYonettigiFonlarinTPD='Fon Portföy Yöneticilerinin Yönettiği Fonların Toplam Portföy Değerleri';
+LocalizationManager.HaklarveSorumlulular='Haklar, Sorumluluklar ve Şartlar';
+LocalizationManager.DisariAktar='Dışarı Aktar';
+LocalizationManager.KatilmaPaylariNasilAlinipSatilir='KATILMA PAYLARI NASIL ALINIP SATILIR ?';
+LocalizationManager.FonSinifindaBugun='Fon Sınıflarında Bugün';
+LocalizationManager.FKuruculariPortfoyDegerleri='Fon Kurucuları Portföy Değerleri';
+LocalizationManager.FonPiyasasiGenelGorunum='Fon Piyasası Genel Görünüm';
+LocalizationManager.FonPortfoyAnalizleri='Fon Portföy Analizleri';
+LocalizationManager.YatirimYapilirkenNelereDikkatEdilmelidir='YATIRIM FONUNA YATIRIM YAPILIRKEN NELERE DİKKAT EDİLMELİDİR ?';
+LocalizationManager.FonDerecelendirilmesi='Yatırım ve Bireysel Emeklilik Fonları, her ay sonu itibariyle, kendi kategorilerindeki emsalleriyle karşılaştırılarak getiri ve risk bazında değerlendirilir.';
+LocalizationManager.BYFYonetimIlkeleri='BORSA YATIRIM FONLARINDA YÖNETİM İLKELERİNE NELERDİR?';
+LocalizationManager.FonKurucuBilgileri='Fon Kurucu Bilgileri';
+LocalizationManager.kurucu='Kurucu';
+LocalizationManager.FonKatilmaBelgesiFiltreBaslik='Fon Katılma Belgesi (%)';
+LocalizationManager.BesYildizliFonlarYatirimFonlari='Beş Yıldızlı Fonlar - SAHA Kurumsal Yatırım Fonları Derecelendirmesi';
+LocalizationManager.GuncelRatingler='Güncel Ratingler';
+LocalizationManager.PortfoyDegerleriFiyatlari='Portföy Değerleri Fiyatları';
+LocalizationManager.HukukiCerceve='Hukuki Çerçeve';
+LocalizationManager.SermayePiyasasiMevzuatindaSYF='SERMAYE PİYASASI MEVZUATINDA SERBEST YATIRIM FONLARI';
+LocalizationManager.VarlikSeciniz='Varlık Seçiniz';
+LocalizationManager.Footer_HerHakkiSaklidir='Her Hakkı Saklıdır';
+LocalizationManager.YabanciFonGetiri='Yabancı Fon Getiri';
+LocalizationManager.HaberinDevami='Haberin Devamı';
+LocalizationManager.BitisTariih='Bitiş Tarihi';
+LocalizationManager.KollektifYatirimKuruluslari='KOLEKTİF YATIRIM KURULUŞLARI NEDİR ?';
+LocalizationManager.PDFOlarakIndir='PDF olarak indir';
+LocalizationManager.FonRisk='FON RİSK';
+LocalizationManager.FonbulB='FONBUL';
+LocalizationManager.Getiriler='- Getiriler %';
+LocalizationManager.FonYoneticiB='FON YÖNETİCİ';
+LocalizationManager.vazgec='Vazgeç';
+LocalizationManager.DolulukOrani='Doluluk Oranı';
+LocalizationManager.YonetimBilgileri='Yönetim Bilgileri';
+LocalizationManager.Varsayilan='Varsayılan';
+LocalizationManager.BorsaYatirimFonRehberi='BORSA YATIRIM FON REHBERİ';
+LocalizationManager.fonOlcutleriGetiri='FON ÖLÇÜT GETİRİ KARŞILAŞTIRMA';
+LocalizationManager.OzelKiraSertifikaY='Özel Kira Sertifika %';
+LocalizationManager.PortfoyDegerleriToplamiYardim='Portföy Değerleri Toplamı Yardım Sayfası';
+LocalizationManager.YoneticiyeAitFonRaitingleri='Yöneticiye Ait Fon Ratingleri';
+LocalizationManager.Özel='Özel';
+LocalizationManager.euro='EURO';
+LocalizationManager.tumu='Tümü';
+LocalizationManager.veri='Veri';
+LocalizationManager.Ekim='Ekim';
+LocalizationManager.Adet='Adet';
+LocalizationManager.Aral='Ara';
+LocalizationManager.FonK='Fon Kurucuları';
+LocalizationManager.Geri='Geri';
+LocalizationManager.Mart='Mart';
+LocalizationManager.BIST='BİST';
+LocalizationManager.BirY='1Y';
+LocalizationManager.BirA='1A';
+LocalizationManager.Cuma='Cuma';
+LocalizationManager.Ocak='Ocak';
+LocalizationManager.Hata='Hata403';
+LocalizationManager.Trln='Trln';
+LocalizationManager.Repo='Ters Repo';
+LocalizationManager.Sali='Salı';
+LocalizationManager.Saha='SAHA';
+LocalizationManager.YatirimciSayilariYardimSayfasi='Yatırımcı Sayıları Yardım Sayfası';
+LocalizationManager.FonunSorumlulugu='Fonun Sorumluluğu';
+LocalizationManager.FonBulSiteHaritasi='FonBul Site Haritası';
+LocalizationManager.BorsaYatirimFonRehber='Borsa Yatırım Fon Rehberi';
+LocalizationManager.YabanciFonGetirileri='Yabancı Fon Getirileri';
+LocalizationManager.FinnetElektronikYayincilik='FINNET Elektronik Yayıncılık Data İletişim San.Tic.Ltd.Şti.';
+
+    }
+
+    LocalizationManager.Init();
+    </script>
+
+    
+
+
+
+    <script type="text/javascript">
+        var Fon ="AAV";
+        var IsIngilizce = "False" == "True" ? true : false;
+        var TypeOfLayout = "FonProfil_Layout";
+        var fonAd = "Ata Portföy İki. His. Sen. Fonu (TL) (HSYF)";
+        var fonUnvan = "Ata Portföy İkinci Hisse Senedi (TL) Fonu (Hisse Senedi Yoğun Fon)";
+
+        $(function () {
+            var helpContent = "<div class='container-fluid'><div class='fancy-logo-place'> <div><a href='/FonBulPlus/YatirimFonlari'><img src='/FonBulPlus/images/fonbul_logo_yatirim.png' alt='FONBUL'></a></div></div><div style='padding-top:10px;'>" + $("#help .content-wrapper").removeClass("content-wrapper").html() + "</div></div>";
+            $('#helpbutton').fancybox({
+                'content': helpContent,
+                maxWidth: 1005,
+                helpers: {
+                    overlay: {
+                        css: {
+                            'background': 'rgba(0, 0, 0, .5)'
+                        }
+                    }
+                },
+                tpl: {
+                    closeBtn: '<a title="Kapat" class="fancybox-item fancybox-close" href="javascript:;"></a>'
+                }
+            });
+        });
+    </script>
+
+    
+    <link href="/FonBulPlus/css/jquery.dataTables.css?v=1.0.0.1" rel="stylesheet" />
+<link href="/FonBulPlus/css/dataTables-responsive.css?v=1.0.0.1" rel="stylesheet" />
+<script src="/FonBulPlus/js/jquery.dataTables.min.js?v=1.0.0.1"></script>
+<script src="/FonBulPlus/js/dataTables-responsive.min.js?v=1.0.0.1"></script>
+<script type="text/javascript">
+
+
+    $.extend($.fn.dataTable.defaults.oLanguage, {
+        "sProcessing": LocalizationManager.Isleniyor,
+        "sLengthMenu": LocalizationManager.SayfadaMenuKayitGoster,
+        "sZeroRecords": LocalizationManager.EslesenKayitBulunamadi,
+        "sInfo": " " + LocalizationManager.StartEndArasiKayit,
+        "sInfoEmpty": LocalizationManager.KayitYok,
+        "sInfoFiltered": LocalizationManager.MaxKayitIcerisindeBulunan,
+        "sInfoPostFix": "",
+        "sSearch": LocalizationManager.Buljs,
+        "sEmptyTable": LocalizationManager.KayitBulunmadi,
+        "sUrl": "",
+        "oPaginate": {
+            "sFirst": LocalizationManager.Ilk,
+            "sPrevious": LocalizationManager.Onceki,
+            "sNext": LocalizationManager.Sonraki,
+            "sLast": LocalizationManager.Son
+        }
+    });
+    $.fn.dataTable.defaults.sLengthMenu = LocalizationManager.SayfadaMenuKayitGoster,
+
+    $.fn.dataTable.defaults.pageLength = 50;
+    $.fn.dataTable.defaults.dom = "lftpir";
+    $.fn.dataTable.defaults.pagingType = "full_numbers";
+
+    //datatable boş veya - alanları sona ekleyerek sıralama
+
+    jQuery.fn.dataTableExt.oSort['nullable-asc'] = function (x, y) {
+
+        var special_letters = {
+            "C": "ca", "c": "ca", "Ç": "cb", "ç": "cb",
+            "G": "ga", "g": "ga", "Ğ": "gb", "ğ": "gb",
+            "I": "ia", "ı": "ia", "İ": "ib", "i": "ib",
+            "O": "oa", "o": "oa", "Ö": "ob", "ö": "ob",
+            "S": "sa", "s": "sa", "Ş": "sb", "ş": "sb",
+            "U": "ua", "u": "ua", "Ü": "ub", "ü": "ub"
+        };
+        for (var val in special_letters) {
+            if (typeof x == "string") {
+                x = x.split(val).join(special_letters[val]).toLowerCase();
+            }
+            if (typeof y == "string") {
+                y = y.split(val).join(special_letters[val]).toLowerCase();
+            }
+        }
+
+        if (typeof x == "number" && typeof y == "number") {
+            return (((x < y && x != null && y != null) || isNaN(y) || y === undefined || y === "" || y === null) ? -1 : (((x > y && x != null && y != null) || isNaN(x) || x === undefined || x === "" || x === null) ? 1 : 0));
+        } else {
+
+            //return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            return (((x < y && x != null && y != null) || y === undefined || y === "" || y === null) ? -1 : (((x > y && x != null && y != null) || x === undefined || x === "" || x === null) ? 1 : 0));
+        }
+
+    };
+
+    jQuery.fn.dataTableExt.oSort['nullable-desc'] = function (x, y) {
+
+        var special_letters = {
+            "C": "ca", "c": "ca", "Ç": "cb", "ç": "cb",
+            "G": "ga", "g": "ga", "Ğ": "gb", "ğ": "gb",
+            "I": "ia", "ı": "ia", "İ": "ib", "i": "ib",
+            "O": "oa", "o": "oa", "Ö": "ob", "ö": "ob",
+            "S": "sa", "s": "sa", "Ş": "sb", "ş": "sb",
+            "U": "ua", "u": "ua", "Ü": "ub", "ü": "ub"
+        };
+        for (var val in special_letters) {
+            if (typeof x == "string") {
+                x = x.split(val).join(special_letters[val]).toLowerCase();
+            }
+            if (typeof y == "string") {
+                y = y.split(val).join(special_letters[val]).toLowerCase();
+            }
+        }
+
+        if (typeof x == "number" && typeof y == "number") {
+            return (((x < y && x != null && y != null) || isNaN(x) || x === undefined || x === "" || x === null) ? 1 : (((x > y && x != null && y != null) || isNaN(y) || y === undefined || y === "" || y === null) ? -1 : 0));
+        } else {
+            //return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+            return (((x < y && x != null && y != null) || x === undefined || x === "" || x === null) ? 1 : (((x > y && x != null && y != null) || y === undefined || y === "" || y === null) ? -1 : 0));
+        }
+
+    };
+
+</script>
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            //$("#bitTarih").datepicker("setDate", new Date(yyyy, mm - 1, dd));
+
+            //$("#basTarih").datepicker("setDate", new Date(yyyy - 1, mm - 1, dd));
+            
+
+            var tarih = new Date(yyyy, mm - 1, dd);
+
+            $('#bitTarih').datetimepicker({
+                format: "DD/MM/YYYY",
+                locale: LocalizationManager.DatePickerLanguage,
+                extraFormats: ["DD/MM/YYYY"],              
+                collapse: false
+            });
+            $('#bitTarih').data("DateTimePicker").date(tarih);
+
+            tarih = new Date(yyyy-1, mm -1, dd);
+            $('#basTarih').datetimepicker({
+                format: "DD/MM/YYYY",
+                locale: LocalizationManager.DatePickerLanguage,
+                extraFormats: ["DD/MM/YYYY"],               
+                collapse: false
+            });
+            $('#basTarih').data("DateTimePicker").date(tarih);
+
+
+            tabloHesapla();
+
+        });
+
+
+        function tabloHesapla() {
+
+            if (!Fon) return;
+            var basTarih = $('#basTarih').data("DateTimePicker").date().format("YYYY-MM-DD");
+            var bitTarih = $('#bitTarih').data("DateTimePicker").date().format("YYYY-MM-DD");
+
+            var param = {
+                //Id: $('#drp_Rapor_Kriterleri').val(),
+                Url: "fonbul-profil-fiyat-grafik",
+                RaporParametreleri: [{ "key": "Kod", "value": Fon }, { "key": "KaydirilmisVeri", "value": "0" }, { "key": "TarihArtanSira", "value": "0" }, { "key": "IlkTarih", "value": basTarih }, { "key": "SonTarih", "value": bitTarih }],
+                OzelParametreler: [{ "key": "VeriAlanlar", "value": "Tarih,Portfoy,FonAktif,Fiyat,ToplamPay,TedariktekiPay,DolulukOran,YatirimciAdet" }],
+                RaporKriter: {
+                    VeriGrup: "FonKriter"
+                }
+            };
+            ajaxStart('#tableLoading');
+            raporTabloCalc(param).done(function (data) {
+
+                var txt = " - " + $("#fonara_input option[value='" + "AAV" + "']").text().split(' - ')[1];
+                if (txt != " - undefined") {
+                    document.title = LocalizationManager.FonFiyat + txt;
+                    $("#fonUnvan").html(txt);
+                }
+
+                raporTabloYukle("#tableContainer", data, { paging: true, sort: false, dataPerPage: 25, dataNumberSeletionPerPage: false });
+                ajaxStop('#tableLoading');
+            });
+        }
+
+
+    </script>
+
+
+
+
+
+    <script src="/FonBulPlus/Modules/app.js?v=22.8"></script>
+
+    <script src="/FonBulPlus/Modules/HaberModulV2.js"></script>
+
+    <script>
+
+        //kapanış grafik rengi
+        var clStockChartColor = '#01b060';
+
+
+    </script>
+
+
+
+
+    
+    <script src="/FonBulPlus/Modules/Fonbul/YardimciFonksiyonlar.js?v=8.3"></script>
+    <script src="/FonBulPlus/Modules/Fonbul/Listeler.js?v=8.2"></script>
+    <script src="/FonBulPlus/Modules/Fonbul/GrafikYukle.js?v=8.9"></script>
+
+
+    <!-- highchart -->
+    
+
+    <script type="text/javascript">
+
+        var TumEmeklilikFonListe;
+        var TumYatirimFonListe;
+        window.fonListesiHazir = false;
+
+        function emeklilikFonuMevcutmu(Kod)
+        {
+            if(TumEmeklilikFonListe && Kod)
+            {
+                for (var i = 0; i < TumEmeklilikFonListe.length; i++) {
+                    if (TumEmeklilikFonListe[i].Value)
+                    {
+                        if (TumEmeklilikFonListe[i].Value.toUpperCase() == Kod.toUpperCase()) {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        function yatirimkFonuMevcutmu(Kod)
+        {
+            if(TumYatirimFonListe && Kod)
+            {
+                for (var i = 0; i < TumYatirimFonListe.length; i++) {
+                    if(TumYatirimFonListe[i].Value)
+                    {
+                        if (TumYatirimFonListe[i].Value.toUpperCase() == Kod.toUpperCase()) {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        $(function () {
+            //kampanya modal gösterimi başlangıç
+            if(new Date()<=new Date(2017,09,31)){
+                var visit=getCookie("kmpnyaModalEkim");
+                if (visit==null || visit==""){
+                    $("#kampanyaModal").modal("show");
+                    var expire=new Date(2017,09,31);//kampanyanın gözükeceği son tarih
+
+                    setCookie("kmpnyaModalEkim","kampanya",expire);
+                }
+            }
+            //kampanya modal gösterimi bitiş
+
+        });
+
+
+$(function () {
+            var kriter_fonliste;
+
+            if(IsEmeklilik)
+            {
+                kriter_fonliste = { "AnaKategoriId": 0, "AnaTipId": 0, "AnaTipListe":[2], "FonListe": [], "KategoriListe": [], "KurucuListe": [], "YoneticiListe": [] };
+
+                FonListeDoldur('fonara_input', kriter_fonliste).done(function (data) {
+                    FonListeDataDoldur(data, "fonara_input");
+                    $("#fonara_input").val(secilenFon);
+                    $("#fonara_input").multiselect("refresh");
+
+                    TumEmeklilikFonListe = data;
+
+                     window.fonListesiHazir = true;
+                    $(document).trigger("fonListesiHazir");
+
+                    var fonVar = data.some(function (x) {
+                        return x.Value === secilenFon;
+                    });
+
+                    if (fonVar) {
+                        $("#fonKod").text("(" + secilenFon + ")").css("visibility", "visible");
+                        $("#fonUnvan").text(fonUnvan).css("visibility", "visible");
+                    }
+                });
+
+
+                kriter_fonliste = { "AnaKategoriId": 0, "AnaTipId": 0, "AnaTipListe":[1,3,4], "FonListe": [], "KategoriListe": [], "KurucuListe": [], "YoneticiListe": []};
+                FonListeDoldur('fonara_input', kriter_fonliste).done(function (data) {
+                    TumYatirimFonListe = data;
+                });
+            }
+            else if(IsYatirim)
+            {
+                kriter_fonliste = { "AnaKategoriId": 0, "AnaTipId": 0, "AnaTipListe":[1,3,4], "FonListe": [], "KategoriListe": [], "KurucuListe": [], "YoneticiListe": []};
+
+                FonListeDoldur('fonara_input', kriter_fonliste).done(function (data) {
+                    FonListeDataDoldur(data, "fonara_input");
+                    $("#fonara_input").val(secilenFon);
+                    $("#fonara_input").multiselect("refresh");
+
+                    TumYatirimFonListe = data;
+
+                    $(document).trigger("fonListesiHazir");
+
+                    var fonVar = data.some(function (x) {
+                        return x.Value === secilenFon;
+                    });
+
+                    if (fonVar) {
+                        $("#fonKod").text("(" + secilenFon + ")").css("visibility", "visible");
+                        $("#fonUnvan").text(fonUnvan).css("visibility", "visible");
+                    }
+                });
+
+
+                kriter_fonliste = { "AnaKategoriId": 0, "AnaTipId": 0, "AnaTipListe":[2], "FonListe": [], "KategoriListe": [], "KurucuListe": [], "YoneticiListe": [] };
+                FonListeDoldur('fonara_input', kriter_fonliste).done(function (data) {
+                    TumEmeklilikFonListe = data;
+                });
+            }
+
+
+        });
+
+
+           //login modalı açma tanımlaması
+ $(function () { /* initiate the plugin */
+
+
+                $("#show-fancy-login").fancybox({
+                    beforeShow: function () { $(".fancybox-iframe").attr("scrolling","no") },
+                    maxWidth: 350,
+                    autoSize: true,
+                    fitToView: false,
+                    helpers: {
+                        overlay: {
+                            css: {
+                                'background': 'rgba(0, 0, 0, .9)'
+                            }
+                        }
+                    },
+                    tpl: {
+                        closeBtn: '<a title="Kapat" class="fancybox-item fancybox-close" href="javascript:;"></a>'
+                    },
+                    openEffect  : 'fade',
+                    closeEffect : 'fade',
+                    scrolling   : false,
+                    minHeight   : 425,
+                    padding: 0,
+                });
+            });
+
+
+        function fonAnalizeYonlendir() {
+
+            if($('#fonara_input').val())
+            {
+                window.location.href = appUrl + "/FonProfilleri/FonAnaliz/" + $('#fonara_input').val();
+            }
+
+        }
+
+
+
+
+    var hisseEndeksKod=null ;
+    var HisseKod =hisseEndeksKod;
+    var Endeks =hisseEndeksKod;
+
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+
+
+        var recaptchaScriptLoaded = false;
+        var recaptchaAjaxReady = false;
+        var captchaUyeGirisresponse;
+
+        function recaptchaRender() {
+            if (recaptchaScriptLoaded && recaptchaAjaxReady) {
+                captchaUyeGirisresponse = grecaptcha.render('captcha', {
+                    'sitekey': '6Lf7xRcUAAAAAGDPbd4jmwCLhEiV56JJLyMwblio',
+                });
+            }
+        }
+
+
+   var CaptchaGoster = false;
+
+
+
+        function recaptchaOnload() {
+            recaptchaScriptLoaded = true;
+            recaptchaRender();
+        }
+
+
+        function KullaniciKontrol(data) {
+
+
+
+            if (data == 0) {
+
+                var recaptcha = $("#g-recaptcha-response").val();
+                if (CaptchaGoster) {
+                    if (recaptcha != undefined && recaptcha != null && recaptcha != "") {
+                        grecaptcha.reset();
+                    } else {
+                        try {
+                            recaptchaAjaxReady = true;
+                            recaptchaOnload();
+                        } catch (e) {
+
+                        }
+
+                    }
+                }
+
+                $("#girisHatasi").attr("style", "display:'block'");
+                $("#girisHatasi").html("Kullanıcı Adı veya Şifre Yanlış");
+
+                $("#LoginModal").modal('show');
+            }
+            else if (data == 1) {
+                $("#girisHatasi").attr("style", "display:'none'");
+                $("#LoginModal").modal('hide');
+
+            }
+            else {
+                $("#girisHatasi").attr("style", "display:''");
+                if (data == 3) {
+                    $("#girisHatasi").html("Aktif aboneliğiniz bitmiş");
+                }
+                else {
+                    $("#girisHatasi").html("Aktif aboneliğiniz yok");
+                }
+
+                $("#LoginModal").modal('show');
+            }
+
+        }
+        function BeforeSubmit() {
+            var mail = $("#mail").val();
+            var sifre = $("#password").val();
+            $("#girisHatasi").hide();;
+
+            if (mail == null || mail == "") {
+                $("#girisHatasi").html('E-posta adresinizi giriniz.');
+                $("#girisHatasi").show();
+                return false;
+            }
+
+            if (sifre == null || sifre == "") {
+                $("#girisHatasi").html('Şifrenizi giriniz.<br/>Veya şifremi unuttum ile şifrenizi belirleyiniz.');
+                $("#girisHatasi").show();
+                return false;
+            }
+
+
+            var recaptcha = $("#g-recaptcha-response").val();
+            var kontrol = false;
+            if (recaptcha == undefined) {
+                kontrol = true;
+            }
+            if (recaptcha != undefined && recaptcha != null && recaptcha != "") {
+                grecaptcha.reset();
+                kontrol = true;
+            }
+
+            if (!kontrol) {
+                ajaxStop('#login-modal');
+                $("#girisHatasi").html('Lütfen robot olmadığınızı doğrulayınız.');
+                document.getElementById('girisHatasi').style.display = 'block';
+                return false;
+            }
+
+            $("#loginForm").submit();;
+        }
+
+        function keypressHandler(e) {
+            var aranan = $("#search_input").val();
+            if (e.which == 13) {
+                e.preventDefault();
+                $(this).blur();
+                //????
+                //if (e.currentTarget==mail || e.currentTarget==password) {
+                //    $('#uyeGirisBtn').focus().click();
+                //}
+                if(e.currentTarget.id == "search_input") {
+
+                    //Search(aranan,13);
+                    if (urlDeger != "" && enterClik == "ok") {
+
+                        window.location.href = urlDeger;
+                    }
+                    else {
+                        $("#search_input").focus();
+                    }
+
+                }
+
+
+            }
+        }
+        $(document).ready(function () {
+            $('input').keypress(keypressHandler);
+
+            $('#LoginModal').on('shown.bs.modal', function () {
+                $("#mail").focus();
+
+            });
+        });
+
+    </script>
+
+
+
+
+    
+
+</head>
+<body>
+    <input name="__RequestVerificationToken" type="hidden" value="_efwFKKFjOWeKm9id3HuqvxPDaRSH4IGkbI_CDI2wZZweS06zTzG5dregLdLU0w-cBszjnxGd5LW5B5IvGSs1OzwNDPJFSgQdZOsmUXD5ko1" />
+
+        <!-- 
+    
+<div id="Homebody_reklam">
+    <div id="body_reklam_Right" style=""><a id="finnet_banner_Right" href="#" target="_blank" style="background-color:transparent;"><img src="https://www.finnet.com.tr/icerik-dosyalari/Banner/2025/nkolay/NK-26-160x600.png" border="0"></a></div>
+    <div id="body_reklam_Left" style=""><a id="finnet_banner_Left" href="#" target="_blank" style="background-color:transparent;"><img src="https://www.finnet.com.tr/icerik-dosyalari/Banner/2025/nkolay/NK-26-160x600.png" border="0"></a></div>
+</div>
+
+
+
+<script defer>
+    let imgElement = document.createElement('img');
+    imgElement.border = "0";
+    imgElement.width = "1";
+    imgElement.height = "1";
+    let timestamp = new Date().getTime();
+
+
+    imgElement.src = "https://view.tr.adjust.com/impression/1vcuik3p";
+    document.getElementById('body_reklam_Left').appendChild(imgElement);
+    document.getElementById('finnet_banner_Left').href = "https://648y.tr.adj.st/apply-bes-credit?adj_t=1rhq2hkr&adj_campaign=fonbul&adj_fallback=https%3A%2F%2Fwww.nkolay.com%2Fkredi%2Fbes-teminatli-kredi&adj_redirect_macos=https%3A%2F%2Fwww.nkolay.com%2Fkredi%2Fbes-teminatli-kredi";
+    document.getElementById('finnet_banner_Right').href = "https://648y.tr.adj.st/apply-bes-credit?adj_t=1rhq2hkr&adj_campaign=fonbul&adj_fallback=https%3A%2F%2Fwww.nkolay.com%2Fkredi%2Fbes-teminatli-kredi&adj_redirect_macos=https%3A%2F%2Fwww.nkolay.com%2Fkredi%2Fbes-teminatli-kredi";
+
+    function getScrolTop() {
+        var p = $(document);
+        if (p.scrollTop() > 123) {
+            $('#Homebody_reklam').css("position", "fixed");
+            $('#Homebody_reklam').css("width", "100%");
+            $('#Homebody_reklam').css("top", "0px");
+            $('#Homebody_reklam').css("z-index", "99");
+            $('.Homebody_clear').css("padding-top", "0px");
+        }
+        else {
+            $('#Homebody_reklam').css("position", "relative");
+            $('#Homebody_reklam').css("width", "100%");
+            $('#Homebody_reklam').css("z-index", "1");
+            $('#Homebody_reklam').css("top", "128px");
+            $('.Homebody_clear').css("padding-top", "128px");
+        }
+    }
+    window.onscroll = function () {
+        getScrolTop();
+    }
+
+
+
+</script>
+
+ -->
+
+
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WN6M978"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <div class="modal fade" id="kampanyaModal" style="position:absolute" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade search-modal" id="search" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div id="login-modal"></div>
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <div class="modal-body">
+                <input class="" id="search_input" onkeyup="Search(this)" type="search" autocomplete="off" placeholder="Fon veya analiz arayın">
+
+                <ul class="AramaSonuc" id="AramaSonuc">
+                  
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function (data) {
+        $('#search').on('hidden.bs.modal', function () {
+            $("#search_input").val('');
+            $("#AramaSonuc").empty();
+        })
+        $('#search').on('shown.bs.modal', function () {
+            // AddClass();
+            $("#search_input").focus();
+            Search(null);
+        });
+
+
+
+
+    });
+
+
+
+</script>
+
+
+
+
+
+
+    <div class="modal fade uye-giris-modal" id="LoginModal" style="position:absolute" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                <div class="modal-body">
+                    <div id="home" aria-labelledby="home-tab">
+                        <h3>&#220;ye Girişi</h3>
+                        <hr />
+                        <div id="girisHatasi" class="alert alert-danger" style="display:none">
+
+                        </div>
+                        <form action="/FonBulPlus/Uye/GirisKontrol" method="post" id="loginForm">
+
+                            <div>
+                                <span id="" class="label-text">E-Posta</span>
+                                <input id="mail" name="mail" type="email" />
+                            </div>
+                            <div>
+                                <span id="" class="label-text">Şifre</span>
+                                <input id="password" name="password" type="password" value="" />
+                            </div>
+
+
+                            <div id="" class="label-text">Kurum Kodu (Kurumsal Kullanıcılar i&#231;in) </div>
+                            <input id="kurumKod" name="kurumkod" type="text" autocomplete="off" value="" />
+
+
+
+                            <div>
+                                <div id="captcha">
+                                </div>
+                            </div>
+                            <div>
+                                <input id="uyeGirisBtn" type="button" value="&#220;YE GİRİŞİ" onclick="BeforeSubmit()" />
+                            </div>
+
+
+
+                            <input id="returnUrl" name="returnUrl" type="hidden" value="YatirimFonlari/FonProfilleri/FonFiyatTablosu/AAV" />
+
+
+                            <div class="beni_hatirla">
+                                <a href="https://www.finnet.com.tr/FinnetStore/Tr/#sifremiunuttum" target="_blank" class="fancybox" data-fancybox-type="ajax">Şifremi Unuttum</a>
+                            </div>
+                                <div class="login-uye-ol-link">Finnet üyesi değilseniz hemen <span style="font-weight:bold;">"Üye"</span> olmak için <a style="color:#ffd800;font-weight:bold;" href="https://www.finnet.com.tr/FinnetStore/Tr/Kullanici/YeniUye">Tıklayınız</a></div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="cover">
+        <!-- header start here -->
+        <header id="layout_header" class="no-print">
+            <!-- /.container-fluid -->
+            <div class="container-fluid">
+                <!-- /.wrapper -->
+                <div class="wrapper">
+                    <ul class="menu-icon">
+
+
+<li id="yatirim">
+    <div>
+            <a href='/FonBulPlus/EmeklilikFonlari' />
+
+
+            <div class="user-icon large_icon"><img src="/FonBulPlus/images/emeklilik_giris.png"></div>
+            <div class="user-icon small_icon"><img src="/FonBulPlus/images/emeklilik_giris_k.png"></div>
+        </a>
+
+    </div>
+
+
+</li>
+
+
+
+
+
+
+    <div id="siteGirisCikisDropdown" class="dropdown logindropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span><img src="/FonBulPlus/images/giris_yap.png" /></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+
+            <li class="uye_giris">
+                    <a href="#" data-toggle="modal" data-target="#LoginModal">
+                        <div class="user-icon"> <img src="/FonBulPlus/images/smal_giris.png" alt="Üye girişi"> </div>
+                    </a>
+            </li>
+            <li class="satin_al">
+                <a href='https://www.finnet.com.tr/FinnetStore/Tr/Urun/FonbulPlus/#satinAl' target="_blank">
+                    <div class="user-icon"> <img src="/FonBulPlus/images/smal_satin_al.png" alt="Satın al"> </div>
+                </a>
+            </li>
+            <li class="uye_kaydi">
+                <a href='https://www.finnet.com.tr/FinnetStore/Tr/Kullanici/YeniUye?sitekod=FonBul' target="_blank">
+                    <div class="user-icon"> <img src="/FonBulPlus/images/smal_uye.png" alt="Üye kaydı"> </div>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+
+
+                    </ul>
+
+
+                        <div class="logo">
+                            <a href="/FonBulPlus/YatirimFonlari">
+                                    <img class="logo_large" src="/FonBulPlus/images/fonbul_logo_yatirim.png" alt="FONBUL">
+                                    <img class="logo_small" src="/FonBulPlus/images/fonbul_logo_yatirim_k.png" alt="FONBUL">
+                            </a>
+
+                        </div>
+
+                    <div id="hisse_ara" class="col-md-6">
+                        <div>
+                            <a href="#" data-toggle="modal" data-target="#search" id="searchModal">
+                                <input class="search-input" type="search" placeholder="Arayın">
+                                <div class="searchbutton" style="border-radius: 0 0 3px 0;">ARA</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.wrapper -->
+            </div>
+            <!-- /.container-fluid -->
+            <div id="nav_container">
+                <!-- Begin button nav menu -->
+                <div id="nav-menu-button"> <i class="fa fa-bars"></i> <i class="fa fa-times"></i> </div>
+                <div id="nav-menu">
+                    <ul class="main">
+                        <li class="home-icon"><a href="/FonBulPlus/YatirimFonlari"><i class="glyphicon glyphicon-home"></i> <span>Ana Sayfa</span></a></li>
+                        <li class="has-sub">
+                            <a href="#">
+                                FON PİYASASI
+                                <span class="glyphicon glyphicon-chevron-down pull-right show-on-mobile" aria-hidden="true"></span>
+                            </a>
+                            <ul class="submain">
+
+                                <li><a href="/FonBulPlus/YatirimFonlari/">Fon Piyasası Genel G&#246;r&#252;n&#252;m</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonSiniflari/FonSiniflarindaBugun">Fon Sınıflarında Bug&#252;n</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonGrupAnalizi/FonGrupAnalizi">Fon Piyasası Varlık Dağılımları</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonPiyasa/FonListesi">Fon Listesi</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonPiyasa/FonPiyasasinaParaGirisCikis">Fon Piyasasına Para Giriş-&#199;ıkış</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonPiyasa/FonPiyasasindaToplamBuyuklukler">Fon Piyasasında Toplam B&#252;y&#252;kl&#252;kler</a></li>
+
+
+ 
+
+<li  class="has-sub">
+    <a href="#" class="has-sub">
+        Fon Rehberleri
+        <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span>
+    </a>
+    <ul class="subsubmain">
+        <li><a href="/FonBulPlus/YatirimFonlari/FonRehberi/YatirimFonRehberi">Yatırım Fon Rehberi</a></li>
+        <li><a href="/FonBulPlus/YatirimFonlari/FonRehberi/BorsaYatirimFonRehberi">Borsa Yatırım Fon Rehberi</a></li>
+        <li><a href="/FonBulPlus/YatirimFonlari/FonRehberi/SerbestYatirimFonRehberi">Serbest Yatırım Fon Rehberi</a></li>
+
+    </ul>
+</li>                                
+                                <li class="has-sub">
+                                    <a href="#">
+                                        Fon Veri Hakkında
+                                        <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span>
+                                    </a>
+                                    <ul class="subsubmain">
+                                        <li><a href="/FonBulPlus/YatirimFonlari/FonVeri/DagilimYuzdeleri">Dağılım Y&#252;zdeleri</a></li>
+                                        <li><a href="/FonBulPlus/YatirimFonlari/FonVeri/PortfoyDegerleriFiyatlari">Portf&#246;y Değerleri Fiyatları</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="/FonBulPlus/YatirimFonlari/Fonbul/SiteHaritasi">FonBul Site Haritası</a></li>
+
+
+                            </ul>
+                        </li>
+
+<li class="has-sub">
+    <a href="#">
+        FON ANALİZLERİ
+        <span class="glyphicon glyphicon-chevron-down pull-right show-on-mobile" aria-hidden="true"></span>
+    </a>
+    <ul class="submain">
+        <li><a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonAnaliz/AAV">Fon Detay Analiz</a></li>
+        <li><a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonFiyatTablosu/AAV">Fon Fiyatları</a></li>
+        <li><a href="/FonBulPlus/YatirimFonlari/FonAnalizleri/Analizler/YeniAcilanFonlar">Yeni A&#231;ılan Fonlar (Yeni)</a></li>
+    </ul>
+</li>                       
+                        <li class="has-sub">
+                            <a href="#">
+                                FON KARŞILAŞTIR
+                                <span class="glyphicon glyphicon-chevron-down pull-right show-on-mobile" aria-hidden="true"></span>
+                            </a>
+                            <ul class="submain">
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonGetirileri/Getiri">Fon Getirileri</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonKarsilastir/Karsilastir/FonOlcutGetiri">Fon &#214;l&#231;&#252;t Getirileri (Yeni)</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonGetirileri/Favoriler">Favoriler (Yeni)</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonGetirileri/Karsilastir">Fon Karşılaştır</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/PortfoyAnalizleri/FonPortfoyDegerleri">Fon Portf&#246;y Analizleri</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/PortfoyAnalizleri/FonPortfoyDagilimi">Fon Portf&#246;y Dağılım</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonKarsilastir/FonToplamBuyuklukler">Fon Toplam B&#252;y&#252;kl&#252;kler</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonKarsilastir/FonParaGirisCikis">Fon Para Giriş - &#199;ıkış</a></li>
+
+                                <li><a href="/FonBulPlus/YatirimFonlari/GetiriHaritasi/GetiriHaritasi">Fon Getiri Haritası</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/TarihAraligiGetiri/FonTarihGetirileri">Fon Tarih Aralığı Getiri</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/YatirimciTercihleri/YatirimciTercihleri">Fon D&#246;nemsel Yatırımcı Tercihleri</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/YatirimciTercihleri/TarihAralikYatirimciTercihleri">Fon Tarih Aralığı Yatırımcı Tercihleri (Yeni)</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FonDolulukOranlari/FonDolulukOranlari">Fon Doluluk Oranları</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a href="#">FON RİSK</a>
+
+                            <ul class="submain">
+
+                                <!--<li>
+                <a href="~/YatirimFonlari/OrtalamaGetiriler/FonIstatistik">Fon Risk Analizleri-->
+                                
+                                <!--</a>
+
+            </li>-->
+                                <li>
+                                    <a href="/FonBulPlus/YatirimFonlari/OrtalamaGetiriler/RiskAnalizi">Risk Analizleri </a>
+
+                                </li>
+                                <li>
+                                    <a href="/FonBulPlus/YatirimFonlari/OrtalamaGetiriler/GetiriDegerleri">Getiri Değerleri </a>
+
+                                </li>
+                            </ul>
+
+
+                        </li>
+
+                        <li class="has-sub">
+                            <a href="#">
+                                GRAFİKLER
+                                <span class="glyphicon glyphicon-chevron-down pull-right show-on-mobile" aria-hidden="true"></span>
+                            </a>
+                            <ul class="submain">
+                                <li><a href="/FonBulPlus/YatirimFonlari/GrafikAnalizleri/TeknikAnaliz">Teknik Analiz</a></li>
+                            </ul>
+                        </li>
+
+ 
+
+<li class="has-sub">
+    <a href="#">
+        FON Y&#214;NETİCİ
+        <span class="glyphicon glyphicon-chevron-down pull-right show-on-mobile" aria-hidden="true"></span>
+    </a>
+    
+    <ul class="submain">
+
+        <li><a href="/FonBulPlus/YatirimFonlari/FonPortFoyYoneticileri/FonYoneticiDetay">Fon Y&#246;neticileri</a></li>
+        <li>
+            <a href="/FonBulPlus/YatirimFonlari/FonPortFoyYoneticileri/PazarPaylari">Pazar Payları</a>
+        </li>
+        <li><a href="/FonBulPlus/YatirimFonlari/FonPortFoyYoneticileri/YoneticiYatirimci">Yatırımcı Sayıları</a></li>
+        <li><a href="/FonBulPlus/YatirimFonlari/FonPortFoyYoneticileri/YoneticiPortfoy">Portf&#246;y Değerleri Toplamı</a></li>
+        <li><a href="/FonBulPlus/YatirimFonlari/FonPortFoyYoneticileri/RiskProfili">Risk Profili(Yeni)</a></li>
+    </ul>
+
+</li>                                                    <li>
+                                <a href="/FonBulPlus/YatirimFonlari/FonHaberleri/HaberAraForm">FON HABER</a>
+
+                            </li>
+                        <li><a href="/FonBulPlus/YatirimFonlari/FonAraBul/FonAraForm">FON ARA</a></li>
+
+
+                        <li class="has-sub">
+                            <a href="#">
+                                FON RATİNG
+                                <span class="glyphicon glyphicon-chevron-down pull-right show-on-mobile" aria-hidden="true"></span>
+                            </a>
+                            <ul class="submain">
+                                <!-- <li><a href="~/YatirimFonlari/FonRating/BesYildizliFonlar">Beş Yıldızlı Fonlar</a></li> -->
+                                <li><a href="/FonBulPlus/YatirimFonlari/FinnetFonRating/GuncelRatingler">G&#252;ncel Ratingler</a></li>
+                                <!-- <li><a href="~/YatirimFonlari/FonRating/RatingiYukselenler">Ratingi Y&#252;kselenler</a></li> -->
+                                <li><a href="/FonBulPlus/YatirimFonlari/FinnetFonRating/FonYoneticisi">Fon Y&#246;neticisi</a></li>
+                                <li><a href="/FonBulPlus/YatirimFonlari/FinnetFonRating/FinnetFonRatingMetodolojisi">Finnet Fon Rating Metodolojisi</a></li>
+                                <!-- <li><a href="~/YatirimFonlari/FonRating/RatinglerHakkinda">Ratingler Hakkında</a></li> -->
+                                <li><a href="/FonBulPlus/YatirimFonlari/FinnetFonRating/Cekinceler">&#199;ekinceler</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="has-sub">
+                            <a href="#">
+                                FİNNET
+                                <span class="glyphicon glyphicon-chevron-down pull-right show-on-mobile" aria-hidden="true"></span>
+                            </a>
+                            <ul class="submain">
+                                <li><a href="https://www.finnet.com.tr/FinnetStore/Tr/Magaza/MagazaListe" target="_blank">&#220;r&#252;nler</a></li>
+                                <li><a href="https://www.finnet.com.tr/FinnetStore/Tr/Destek" target="_blank">Destek</a></li>
+                                <li><a href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/Referanslar" target="_blank">Referanslarımız</a></li>
+                                <li><a href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/Hakkimizda" target="_blank">Finnet Hakkında</a></li>
+                                <li><a href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/Iletisim" target="_blank">Bize Ulaşın</a></li>
+                                <li><a href="https://www.finnet2000.com/F2000Plus" target="_blank"><img src="/FonBulPlus/images/finnet_small.png" alt="Finnet 2000 Plus" /></a></li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </header>
+
+        <div class="ReklamSolSag_dikey no-print">
+            
+
+        </div>
+
+
+        
+
+
+
+
+
+
+
+<div class="modal-wrapper sublayout">
+    <div class="content-wrapper">
+        <div class="navigation">
+            <div class="col-xs-12">
+                <h1 class="pageTitle">
+                    
+    FON PROFİLİ
+     <span id="fonKod" style="visibility:hidden"></span>
+                    <span id="fonUnvan" style="visibility:hidden"></span>
+                </h1>
+                    <a href="#" id="helpbutton"><img class="help-button" src="/FonBulPlus/images/help.png"></a>
+
+            </div>
+            <div id="SearchMobileDisplay" class="col-xs-12"></div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div id="finnet_sub_menu" class="content-wrapper">
+        <section class="finnet_sub_menu">
+            <div id="nav-sub-menu-button"> <i class="glyphicon glyphicon-object-align-bottom"></i> <i class="glyphicon glyphicon-remove"></i> </div>
+            <div id="nav-sub-menu">
+                <ul class="main">
+                    <li>
+                        <a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonAnaliz/AAV">ANALİZ</a>
+                    </li>
+                    <li>
+                        <a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonYillikGetiri/AAV">
+                            YILLIK GETİRİLER
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonAylikGetiri/AAV">
+                            AYLIK GETİRİLER
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonPerformansOlculeri/AAV">
+                            PERFORMANS &#214;L&#199;&#220;LERİ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonGrafik/AAV">GRAFİK</a>
+                    </li>
+                        <li>
+                            <a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonHaberler/AAV">HABERLER</a>
+
+                        </li>
+                    <li>
+                        <a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonFiyatTablosu/AAV">FON FİYATLARI</a>
+                    </li>
+                    <li>
+                        <a href="/FonBulPlus/YatirimFonlari/FonProfilleri/FonKunye/AAV">K&#220;NYE</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <div>
+        <div id="help" style="display:none ">
+
+<!--
+Buraya sayfanın linkleri yazılacak. Yardımlardaki içerik Fonbul Plus linkindeki başlıklara göre düzeltilecek.
+Fonbul Plus url: http://fonbul.com/FonBulPlus/EmeklilikFonlari/FonProfilleri/FonFiyatTablosu/GES
+Fonbul Url:http://www.fonbul.com/emeklilik/fon_gunluk_getiriler.asp
+-->
+<div class="content-wrapper">
+    <div class="navigation">
+        <div class="col-md-12">
+            <div class="pull-left">
+                <h1 class="pageTitle">
+                    Fon Fiyatları
+                </h1>
+            </div>
+                <div class="pull-right">
+                    <a href="/FonBulPlus/YatirimFonlari/Yardim/FonFiyatTablosu" class="btn btn-success btn-sm">Yardım Sayfasına Git</a>
+                </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="help-content">
+
+        <p><b>Fon Fiyatları</b> sayfasında seçilen fon için seçilen başlangıç ve bitiş tarihleri arasında aşağıdaki veriler listelenmektedir:</p>
+        <p>
+            <b>
+                Fiyat;
+            </b> Fonun ilgili tarihteki fiyatıdır.
+        </p>
+        <p>
+            <b>
+                Portföy Değeri;
+            </b> Fonun toplam portföy değerini gösterir.
+        </p>
+        <p>
+            <b>
+                Toplam Pay Değeri;
+            </b> Fonun toplam pay değerini gösterir.
+        </p>
+        <p>
+            <b>
+                Tedavüldeki Pay;
+            </b> Fonun tedavüldeki pay değerini gösterir.
+        </p>
+        <p>
+            <b>
+                Yatırımcı Adedi;
+            </b> Fonda yer alan yatırımcı sayısını gösterir.
+        </p>
+        <p><b>Doluluk Oranı (%);</b> Belirtilen tarihteki tedavüldeki payın, fonun toplam payına oranını gösterir.</p>
+    </div>
+</div>
+    
+</div>
+        
+
+<section class="content-wrapper">
+    <div id="selection_tools">
+        <div id="tableLoading" class="modal"></div>
+        <div class="row">
+
+            <div id="div_basTarih" class="col-sm-3">
+                <span id="lbl_tarih_bas" class="label-text">Başlangı&#231; Tarih </span>
+                <input name="basTarih" type="text" id="basTarih"  />
+            </div>
+            <div id="div_bitTarih" class="col-sm-3">
+                <span id="lbl_tarih_bit" class="label-text">Bitiş Tarih: </span>
+                <input name="bitTarih" type="text" id="bitTarih" />
+            </div>
+            <div class="col-sm-2">
+                <button onclick="tabloHesapla()" type="button" class="btn btn-success btn-sm mybtn btnCalculate">
+                    <i class="fa fa-refresh"></i>&nbsp;Analizi Getir
+                </button>
+
+
+            </div>
+        </div>
+
+    </div>
+    <div id="tableContainerDiv" class="content-wrapper">
+        <table id="tableContainer" class="table table-striped fixedTableHaders">
+            <caption class="note-folded green">
+                <h2>Fon Fiyat Tablosu</h2>
+            </caption>
+        </table>
+
+    </div>
+    <div class="row">
+       
+<div class="content-wrapper">
+    <div class="mb10">
+
+        <div class="notLogged">
+
+            <p class="normal-text-uyari">İ&#231;erik kısıtlı g&#246;sterilmektedir.</p>
+
+
+
+            <p class="normal-text">FonBul Plus&#39;a abone olarak t&#252;m verilere ulaşabilirsiniz.</p>
+            <p><a class="warning-text" href='https://www.finnet.com.tr/FinnetStore/Tr/Urun/FonbulPlus/#satinAl' target="_parent">Abone olmak i&#231;in buraya tıklayınız.</a></p>
+
+
+
+        </div>
+    </div>
+</div>      
+    </div>
+
+</section>
+
+
+    </div>
+</div>
+
+        <div id="push" class="no-print"></div>
+    </div>
+    <div class="modal fade" id="kriterModal" data-toggle="modal" tabindex="-1" role="dialog" aria-labelledby="Information" aria-hidden="true" data-keyboard="false">
+        <div class="modal-dialog DetayliAra">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">Detaylı Arama Ekranı</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12 KelimeGiris">
+                        <textarea id="kelimeDeger" placeholder="Aramak istediğiniz kelime, kelime öbeği ya da cümleleri aralarında virgül kullanarak giriniz."></textarea>
+                        <div class="ornek">Örn; Fon, Sermaye piyasası, Sermaye Piyasası Kurulu'na başvurulmuştur.</div>
+                    </div>
+                    <div class="col-sm-6 input-cover">
+                        <span class="label-text"></span>
+                        <select id="kelimeKriter" class="selectpicker">
+                            <option value="1">İçinde Geçen</option>
+                            <option value="2">-ile Başlayan</option>
+                            <option value="2">-ile Biten</option>
+                            <option value="4">Eşit Olan</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 input-cover">
+                        <span class="label-text"></span>
+                        <select id="kelimeBakilacakYer" class="selectpicker" multiple data-live-search="true" data-live-search-placeholder="Ara">
+                            <option value="2" selected>İçerikte</option>
+                            <option value="3">Özette</option>
+                            <option value="4">Açıklamada</option>
+                            <option value="0">Tümünde</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-12 input-cover">
+                        <button style="width:100px;" type="button" data-dismiss="modal" class="btn btn-success col-sm-2 pull-right" onclick="tabloHesapla(undefined,true);"><i class="glyphicon glyphicon-search"></i>Ara</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--
+         =======================
+         BEGIN FOOTER
+         =======================
+         -->
+    <div id="footer" class="no-print">
+        <div class="container-fluid">
+            <div class="wrapper">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h6>FONBUL</h6>
+                            <ul class="cekince no-bullet">
+                                <li>
+                                    Burada yer alan yatırım bilgi, yorum ve tavsiyeleri yatırım danışmanlığı kapsamında değildir.
+                                    Yatırım danışmanlığı hizmeti, aracı kurumlar, portföy yönetim şirketleri, mevduat kabul etmeyen bankalar ile müşteri arasında imzalanacak yatırım danışmanlığı sözleşmesi
+                                    çerçevesinde sunulmaktadır. Burada yer alan yorum ve tavsiyeler, yorum ve tavsiyede bulunanların kişisel görüşlerine dayanmaktadır.
+                                    Bu görüşler, mali durumunuz ile risk ve getiri tercihlerinize uygun olmayabilir. Bu nedenle, sadece burada yer alan bilgilere dayanılarak yatırım kararı verilmesi, beklentilerinize uygun sonuçlar doğurmayabilir.
+                                    <br />
+                                    BİST isim ve logosu 'Koruma Marka Belgesi' altında korunmakta olup izinsiz kullanılamaz, iktibas edilemez, değiştirilemez. BİST ismi altında açıklanan tüm bilgilerin telif hakları tamamen BİST'a ait olup, tekrar yayımlanamaz.
+
+                                    BİST piyasalarında oluşan tüm verilere ait telif hakları tamamen BİST’e ait olup, bu veriler tekrar yayınlanamaz. Analizlerde, piyasa kapanış verileri kullanılmaktadır.
+                                </li>
+                            </ul>
+
+                        <ul class="footer-link no-bullet">
+
+                            <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Magaza/MagazaListe">&#220;r&#252;nler</a></li>
+                            <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Cozumler/WebIcerikCozumleri">Kurumsal &#199;&#246;z&#252;mler</a></li>
+                            <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/Referanslar">Referanslarımız</a></li>
+                            <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/Hakkimizda">Finnet Hakkında</a></li>
+                            <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/Iletisim">Bize Ulaşın</a></li>
+
+                            <li><a target="_blank" href="/FonBulPlus/YatirimFonlari/Fonbul/SiteHaritasi">Site Haritası</a></li>
+                        </ul>
+
+
+                        <div class="SozlesmelerList">
+                            <ul>
+                                <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/YasalUyari">Yasal Uyarı</a></li>
+                                <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/FinnetKullaniciSozlesmesi">Kullanıcı Sözleşmesi</a></li>
+                                <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/GizlilikPolitikasi">Gizlilik Politikası</a></li>
+                                <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Dosyalar/Sozlesmeler/KisiselVerilerininIslenmesiUyeAcikRizaBeyani.pdf">Kişisel Verilerin İşlenmesi</a></li>
+                                <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/KisiselVerilerinKorunmasi">Kişisel Verilerin Koruması</a></li>
+                                <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Kurumsal/CerezPolitikasi">Çerez Politikası</a></li>
+                                <li><a target="_blank" href="https://www.finnet.com.tr/FinnetStore/Tr/Dosyalar/Sozlesmeler/KisiselVeriBasvuruFormu_Kurumlar.pdf">Kişisel Veri Başvuru Formu</a></li>
+                            </ul>
+                            <style>
+                                .SozlesmelerList ul li {
+                                    float: left;
+                                    padding: 0px 5px 0px 5px !important;
+                                    margin: 0px 3px 0px 0px !important;
+                                    border-left: 1px solid #616161;
+                                }
+
+                                    .SozlesmelerList ul li A {
+                                        color: #616161 !important;
+                                    }
+
+                                .SozlesmelerList {
+                                    border-top: 1px solid #415971;
+                                    padding-top: 10px;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <!--[if gte IE 9]><!-->
+                        <img src="/FonBulPlus/images/fonbul_grey_logo.png" alt="FONBUL" class="footer-logo retina">
+                        <!--<![endif]-->
+                        <!--[if lte IE 8]>
+                        <img src="~/images/fonbul_grey_logo.png" alt="FONBUL" class="footer-logo retina">
+                        <![endif]-->
+
+                        <p>FINNET Elektronik Yayıncılık Data İletişim San.Tic.Ltd.Şti.</p>
+                    </div>
+                    <div class="col-md-2 social-media">
+                        <ul>
+
+                            <li><a href="https://twitter.com/finnetyazilim" target="_blank"><img src="/FonBulPlus/images/twitter.png"><img class="social_hover" src="/FonBulPlus/images/twitter_hvr.png"></a></li>
+                            <li><a href="https://www.facebook.com/finnetyayincilik" target="_blank"><img src="/FonBulPlus/images/facebook.png"><img class="social_hover" src="/FonBulPlus/images/facebook_hvr.png"></a></li>
+                            <li><a href="https://www.youtube.com/user/finnet2000" target="_blank"><img src="/FonBulPlus/images/youtube.png"><img class="social_hover" src="/FonBulPlus/images/youtube_hvr.png"></a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.#footer -->
+    <!-- Bottom footer -->
+    <footer id="Copyright">&copy; 2026 FONBUL. Her Hakkı Saklıdır. </footer>
+
+    <!--
+            =======================
+            END FOOTER
+            =======================
+            -->
+    <!-- BEGIN BACK TO TOP BUTTON -->
+    <div id="back-top"> <a href="#top"><i class="fa fa-chevron-up"></i></a> </div>
+    <!-- END BACK TO TOP -->
+
+
+    <script type="text/javascript">
+
+        $(document).on("ajaxStart", function () {
+            $("#tableLoading").show();
+        });
+
+        $(document).on("ajaxStop", function () {
+            $("#tableLoading").hide();
+        });
+
+    </script>
+
+</body>
+
+
+</html>

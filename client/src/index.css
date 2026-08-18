@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-slate-100 text-slate-800 antialiased;
+}
+
+.split-pane-content > div {
+  max-width: 100% !important;
+}
+
+.split-pane-content .mx-auto {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.split-pane-content table {
+  font-size: 0.7rem;
+}

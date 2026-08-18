@@ -1,0 +1,41 @@
+{
+  "name": "fundtrack-local-client",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "dev:remote": "vite --host",
+    "build": "tsc --noEmit && vite build",
+    "build:cap": "tsc --noEmit && cross-env CAPACITOR_BUILD=1 vite build",
+    "prepare:android-node": "node scripts/prepare-android-node.mjs",
+    "cap:sync": "npm run build:cap && npm run prepare:android-node && npx cap sync android",
+    "cap:open": "npx cap open android",
+    "cap:run": "npm run cap:sync && npx cap run android",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@choreruiz/capacitor-node-js": "^1.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.6.0",
+    "recharts": "^3.8.1"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^8.4.0",
+    "@capacitor/app": "^8.1.0",
+    "@capacitor/cli": "^8.4.0",
+    "@capacitor/core": "^8.4.0",
+    "@capacitor/status-bar": "^8.0.2",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "cross-env": "^10.1.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  }
+}
