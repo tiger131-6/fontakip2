@@ -151,6 +151,8 @@ export function dailyChangeSourceLabel(source: string): string {
       return 'Bigpara';
     case 'TEFAS':
       return 'TEFAS';
+    case 'FVT':
+      return 'FVT';
     case 'FAILED':
       return 'Başarısız';
     default:

@@ -50,6 +50,7 @@ import { fetchTefasFundDailyChangePercent, fetchTefasFundHistoricalChangePercent
 import { fetchTefasMinPurchaseInfo } from './tefas-fund-info';
 import { fetchMynetBist100 } from './mynet-bist100';
 import { fetchMarketSummary } from './yahoo-market-summary';
+import { fetchFvtPortfolio } from './fvt-portfolio';
 import {
   getPortfolio,
   getPortfolioHistory,
@@ -449,7 +450,32 @@ app.get('/api/market/bist100', async (_req: Request, res: Response, next: NextFu
   }
 });
 
-/** GET /api/market/summary — Yahoo Finance BIST 100, USD/TRY, EUR/TRY, ONS altın. */
+/** GET /api/market/fvt-portfolio/:fundCode — FVT portföy dağılımı (ağırlık + günlük %). */
+app.get(
+  '/api/market/fvt-portfolio/:fundCode',
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const fundCode = String(req.params.fundCode ?? '').trim().toUpperCase();
+      if (!/^[A-Z0-9]{2,5}$/.test(fundCode)) {
+        res.status(400).json({ error: 'Geçerli bir fon kodu gerekli.' });
+        return;
+      }
+      const result = await fetchFvtPortfolio(fundCode);
+      res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+      res.set('Pragma', 'no-cache');
+      res.json({
+        fundCode,
+        holdings: result.holdings,
+        dailyEstimate: result.dailyEstimate,
+        fetchedAt: new Date().toISOString(),
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+/** GET /api/market/summary — Yahoo Finance BIST 100, USD/TRY, EUR/TRY, gram altın. */
 app.get('/api/market/summary', async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const summary = await fetchMarketSummary();

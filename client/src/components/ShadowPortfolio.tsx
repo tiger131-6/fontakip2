@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import ViewHeader from './ViewHeader';
 import { apiUrl } from '../config/apiBase';
-import { scrapeFundCompositionFromEkofin } from '../utils/ekofin';
+import { fetchFvtPortfolio } from '../utils/fvtPortfolio';
 import { fetchStockDailyChange, dailyChangeSourceLabel } from '../utils/stockDailyChange';
 
 interface ShadowStock {
@@ -14,10 +14,11 @@ interface ShadowStock {
 interface ShadowPortfolioItem {
   fundCode: string;
   stocks: ShadowStock[];
+  /** FVT "Günün Tahmini" from guess WebSocket; null when unavailable. */
+  fvtDailyEstimate?: number | null;
 }
 
 const STORAGE_KEY = 'shadow_portfolios';
-const FETCH_COOLDOWN_MS = 500;
 const ERROR_AUTO_DISMISS_MS = 20000;
 
 interface MarketQuote {
@@ -64,44 +65,9 @@ function formatChangePct(change: number): string {
   return `${sign}${change.toFixed(2)}%`;
 }
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 function formatErrorMessage(error: unknown): string {
   if (error instanceof Error) return error.message;
   return String(error);
-}
-
-/** Sequential JSON fetch — one stock at a time with cooldown. */
-async function fetchMarketData(
-  stocks: ShadowStock[]
-): Promise<{
-  updates: Map<string, number>;
-  sources: Map<string, string>;
-  errors: string[];
-}> {
-  const updates = new Map<string, number>();
-  const sources = new Map<string, string>();
-  const errors: string[] = [];
-
-  for (const stock of stocks) {
-    try {
-      const result = await fetchStockDailyChange(stock.ticker);
-      const change = Number(result.value);
-      if (!Number.isFinite(change)) {
-        throw new Error(`${stock.ticker}: geçersiz değer (${result.value})`);
-      }
-      updates.set(stock.ticker, change);
-      sources.set(stock.ticker, result.source);
-      await sleep(FETCH_COOLDOWN_MS);
-    } catch (error) {
-      const message = formatErrorMessage(error);
-      errors.push(`${stock.ticker}: ${message}`);
-      console.error(`Fetch failed for ${stock.ticker}:`, message);
-      await sleep(FETCH_COOLDOWN_MS);
-    }
-  }
-
-  return { updates, sources, errors };
 }
 
 function sanitizeStock(raw: unknown): ShadowStock | null {
@@ -140,7 +106,11 @@ function readStoredPortfolios(): ShadowPortfolioItem[] {
 
     for (const item of parsed) {
       if (!item || typeof item !== 'object') continue;
-      const record = item as { fundCode?: unknown; stocks?: unknown };
+      const record = item as {
+        fundCode?: unknown;
+        stocks?: unknown;
+        fvtDailyEstimate?: unknown;
+      };
       const fundCode =
         typeof record.fundCode === 'string' ? record.fundCode.trim().toUpperCase() : '';
       if (!fundCode || seenFunds.has(fundCode)) continue;
@@ -156,7 +126,12 @@ function readStoredPortfolios(): ShadowPortfolioItem[] {
         stocks.push(stock);
       }
 
-      result.push({ fundCode, stocks });
+      const fvtDailyEstimate =
+        typeof record.fvtDailyEstimate === 'number' && Number.isFinite(record.fvtDailyEstimate)
+          ? record.fvtDailyEstimate
+          : null;
+
+      result.push({ fundCode, stocks, fvtDailyEstimate });
     }
 
     return result;
@@ -186,6 +161,11 @@ function formatPct(n: number): string {
 
 function signedPct(n: number): string {
   return `${n > 0 ? '+' : ''}${formatPct(n)}%`;
+}
+
+function signedFvtPct(n: number): string {
+  const formatted = n.toLocaleString('tr-TR', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+  return `${n > 0 ? '+' : ''}${formatted}%`;
 }
 
 function returnColor(n: number): string {
@@ -223,8 +203,7 @@ function StockRow({ stock, normalize, trackedWeight, fetchToken, onChange, onRem
   const [weightText, setWeightText] = useState(() => numToText(stock.weight));
   const [changeText, setChangeText] = useState(() => numToText(stock.dailyChange));
 
-  // Re-sync local inputs whenever this fund's stocks are refreshed externally
-  // (Ekofin composition import updates weights; İş Yatırım updates daily change).
+  // Re-sync local inputs whenever this fund's stocks are refreshed externally (FVT import).
   useEffect(() => {
     setWeightText(numToText(stock.weight));
     setChangeText(numToText(stock.dailyChange));
@@ -304,14 +283,12 @@ function StockRow({ stock, normalize, trackedWeight, fetchToken, onChange, onRem
 interface FundCardProps {
   item: ShadowPortfolioItem;
   normalize: boolean;
-  isFetching: boolean;
-  isImporting: boolean;
+  isLoading: boolean;
   fetchToken: number;
   fetchError: string | null;
   lastError: string | null;
   onClearLastError: () => void;
-  onImportComposition: (fundCode: string) => void;
-  onFetchMarketData: (fundCode: string) => void;
+  onRefreshPortfolio: (fundCode: string) => void;
   onAddStock: (fundCode: string, stock: ShadowStock) => void;
   onUpdateStock: (
     fundCode: string,
@@ -326,14 +303,12 @@ interface FundCardProps {
 function FundCard({
   item,
   normalize,
-  isFetching,
-  isImporting,
+  isLoading,
   fetchToken,
   fetchError,
   lastError,
   onClearLastError,
-  onImportComposition,
-  onFetchMarketData,
+  onRefreshPortfolio,
   onAddStock,
   onUpdateStock,
   onRemoveStock,
@@ -368,42 +343,13 @@ function FundCard({
             <div className="font-mono text-lg font-bold text-indigo-900">{item.fundCode}</div>
             <button
               type="button"
-              onClick={() => onImportComposition(item.fundCode)}
-              disabled={isImporting}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-white px-2.5 py-1 text-[10px] font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 disabled:cursor-not-allowed disabled:opacity-50"
-              title="Ekofin üzerinden fonun hisse kompozisyonunu (KAP) otomatik getir"
-            >
-              <svg
-                className={`h-3.5 w-3.5 ${isImporting ? 'animate-spin' : ''}`}
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden
-              >
-                {isImporting ? (
-                  <path
-                    fillRule="evenodd"
-                    d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 00-.11-1.499H4.414a.75.75 0 00-.75.75v3.957a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.388z"
-                    clipRule="evenodd"
-                  />
-                ) : (
-                  <path
-                    fillRule="evenodd"
-                    d="M10 3a.75.75 0 01.75.75v6.19l1.72-1.72a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0l-3-3a.75.75 0 111.06-1.06l1.72 1.72V3.75A.75.75 0 0110 3zM3.5 13a.75.75 0 01.75.75v1.5c0 .414.336.75.75.75h10a.75.75 0 00.75-.75v-1.5a.75.75 0 011.5 0v1.5A2.25 2.25 0 0115.5 17.5h-10A2.25 2.25 0 013.25 15.25v-1.5A.75.75 0 013.5 13z"
-                    clipRule="evenodd"
-                  />
-                )}
-              </svg>
-              {isImporting ? 'Getiriliyor…' : 'Kompozisyon (Ekofin)'}
-            </button>
-            <button
-              type="button"
-              onClick={() => onFetchMarketData(item.fundCode)}
-              disabled={isFetching || item.stocks.length === 0}
+              onClick={() => onRefreshPortfolio(item.fundCode)}
+              disabled={isLoading}
               className="inline-flex items-center gap-1.5 rounded-lg border border-indigo-200 bg-white px-2.5 py-1 text-[10px] font-semibold text-indigo-700 shadow-sm transition hover:bg-indigo-50 disabled:cursor-not-allowed disabled:opacity-50"
-              title="İş Yatırım JSON API üzerinden BIST günlük değişimlerini çek"
+              title="FVT portföy dağılımını tek istekle getir (ağırlık + günlük %)"
             >
               <svg
-                className={`h-3.5 w-3.5 ${isFetching ? 'animate-spin' : ''}`}
+                className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`}
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden
@@ -414,14 +360,41 @@ function FundCard({
                   clipRule="evenodd"
                 />
               </svg>
-              {isFetching ? 'Yükleniyor…' : 'Verileri Çek (İş Yatırım)'}
+              {isLoading ? 'Getiriliyor…' : 'FVT\'den Getir'}
             </button>
           </div>
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
-            Tahmini Fon Getirisi
-          </div>
-          <div className={`mt-0.5 text-3xl font-extrabold tabular-nums ${returnColor(estimate)}`}>
-            {signedPct(estimate)}
+          <div className="mt-2 flex flex-wrap items-start gap-6 sm:gap-8">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wide text-slate-400">
+                Tahmini Fon Getirisi (Bizim)
+              </span>
+              <div className={`mt-0.5 text-3xl font-extrabold tabular-nums ${returnColor(estimate)}`}>
+                {signedPct(estimate)}
+              </div>
+            </div>
+
+            {item.fvtDailyEstimate != null && (
+              <div className="border-l border-slate-200 pl-6 sm:pl-8">
+                <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-slate-400">
+                  Tahmini Fon Getirisi (FVT)
+                  <svg
+                    className="h-3 w-3 text-slate-400"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                  </svg>
+                </span>
+                <div
+                  className={`mt-0.5 text-2xl font-bold tabular-nums ${
+                    item.fvtDailyEstimate >= 0 ? 'text-emerald-500' : 'text-red-500'
+                  }`}
+                >
+                  {signedFvtPct(item.fvtDailyEstimate)}
+                </div>
+              </div>
+            )}
           </div>
           {lastError && (
             <div className="mt-2 rounded border border-red-400 bg-red-100 px-3 py-2 text-[10px] text-red-700">
@@ -464,8 +437,8 @@ function FundCard({
       <div className="px-2">
         {item.stocks.length === 0 ? (
           <p className="px-2 py-3 text-center text-xs text-slate-400">
-            Henüz hisse eklenmedi. Yukarıdaki &quot;Kompozisyon (Ekofin)&quot; ile otomatik getirin
-            veya aşağıdan manuel ekleyin.
+            Henüz hisse eklenmedi. &quot;FVT&apos;den Getir&quot; ile portföy dağılımını
+            otomatik getirin veya aşağıdan manuel ekleyin.
           </p>
         ) : (
           <table className="w-full">
@@ -553,8 +526,7 @@ export default function ShadowPortfolio() {
   const [newFundCode, setNewFundCode] = useState('');
   const [normalize, setNormalize] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [fetchingFunds, setFetchingFunds] = useState<Set<string>>(() => new Set());
-  const [importingFunds, setImportingFunds] = useState<Set<string>>(() => new Set());
+  const [loadingFunds, setLoadingFunds] = useState<Set<string>>(() => new Set());
   const [fetchTokens, setFetchTokens] = useState<Record<string, number>>({});
   const [fetchErrors, setFetchErrors] = useState<Record<string, string>>({});
   const [lastErrors, setLastErrors] = useState<Record<string, string>>({});
@@ -642,11 +614,10 @@ export default function ShadowPortfolio() {
       setError(`${code} zaten günlük tahmin listesinde mevcut.`);
       return;
     }
-    setPortfolios((prev) => [...prev, { fundCode: code, stocks: [] }]);
+    setPortfolios((prev) => [...prev, { fundCode: code, stocks: [], fvtDailyEstimate: null }]);
     setNewFundCode('');
     setError(null);
-    // Immediately try to auto-fill the underlying stocks from Ekofin.
-    void handleImportComposition(code);
+    void handleFetchFvtPortfolio(code);
   };
 
   const removePortfolio = (fundCode: string) => {
@@ -691,9 +662,9 @@ export default function ShadowPortfolio() {
     );
   };
 
-  /** Auto-populate a fund's underlying stocks from Ekofin (KAP composition). */
-  const handleImportComposition = async (fundCode: string) => {
-    setImportingFunds((prev) => new Set(prev).add(fundCode));
+  /** Fetch FVT portfolio; fallback to İş Yatırım/TEFAS only when Getiri % is missing. */
+  const handleFetchFvtPortfolio = async (fundCode: string) => {
+    setLoadingFunds((prev) => new Set(prev).add(fundCode));
     setFetchErrors((prev) => {
       const next = { ...prev };
       delete next[fundCode];
@@ -702,116 +673,49 @@ export default function ShadowPortfolio() {
     clearFundLastError(fundCode);
 
     try {
-      const holdings = await scrapeFundCompositionFromEkofin(fundCode);
+      const fvtData = await fetchFvtPortfolio(fundCode);
+
+      const enriched = await Promise.all(
+        fvtData.holdings.map(async (item) => {
+          if (item.dailyChange != null) {
+            return item;
+          }
+
+          try {
+            const dailyChangeResult = await fetchStockDailyChange(item.ticker);
+            const value = Number(dailyChangeResult.value);
+            return {
+              ...item,
+              dailyChange: Number.isFinite(value) ? value : 0,
+              source: dailyChangeResult.source || 'Bilinmiyor',
+            };
+          } catch {
+            return { ...item, dailyChange: 0, source: 'FAILED' };
+          }
+        })
+      );
 
       setPortfolios((prev) =>
         prev.map((p) => {
           if (p.fundCode !== fundCode) return p;
-          // Keep any daily-change values we already fetched for retained tickers.
-          const prevChange = new Map(p.stocks.map((s) => [s.ticker, s.dailyChange]));
-          const prevSource = new Map(p.stocks.map((s) => [s.ticker, s.dailyChangeSource]));
-          const stocks: ShadowStock[] = holdings.map((h) => ({
+          const stocks: ShadowStock[] = enriched.map((h) => ({
             ticker: h.ticker,
             weight: h.weight,
-            dailyChange: prevChange.get(h.ticker) ?? 0,
-            dailyChangeSource: prevSource.get(h.ticker) ?? null,
+            dailyChange: h.dailyChange ?? 0,
+            dailyChangeSource: h.source,
           }));
-          return { ...p, stocks };
+          return { ...p, stocks, fvtDailyEstimate: fvtData.dailyEstimate };
         })
       );
 
-      // Bump the token so each StockRow re-syncs its weight/change inputs.
       setFetchTokens((prev) => ({ ...prev, [fundCode]: (prev[fundCode] ?? 0) + 1 }));
+      clearFundLastError(fundCode);
     } catch (e) {
       const message = formatErrorMessage(e);
       setFundLastError(fundCode, message);
       setFetchErrors((prev) => ({ ...prev, [fundCode]: message }));
     } finally {
-      setImportingFunds((prev) => {
-        const next = new Set(prev);
-        next.delete(fundCode);
-        return next;
-      });
-    }
-  };
-
-  const handleFetchMarketData = async (fundCode: string) => {
-    const portfolio = portfolios.find((p) => p.fundCode === fundCode);
-    if (!portfolio || portfolio.stocks.length === 0) {
-      setFundLastError(fundCode, 'Önce en az bir hisse ekleyin.');
-      setFetchErrors((prev) => ({
-        ...prev,
-        [fundCode]: 'Önce en az bir hisse ekleyin.',
-      }));
-      return;
-    }
-
-    setFetchingFunds((prev) => new Set(prev).add(fundCode));
-    setFetchErrors((prev) => {
-      const next = { ...prev };
-      delete next[fundCode];
-      return next;
-    });
-    clearFundLastError(fundCode);
-
-    try {
-      const { updates, sources, errors } = await fetchMarketData(portfolio.stocks);
-
-      if (errors.length > 0) {
-        setFundLastError(fundCode, errors.join(' · '));
-      }
-
-      if (updates.size === 0) {
-        setFetchErrors((prev) => ({
-          ...prev,
-          [fundCode]:
-            errors[0] ??
-            'İş Yatırım verisi alınamadı. Aşağıdaki hata detayına bakın veya manuel girin.',
-        }));
-        return;
-      }
-
-      setPortfolios((prev) =>
-        prev.map((p) => {
-          if (p.fundCode !== fundCode) return p;
-          return {
-            ...p,
-            stocks: p.stocks.map((s) => {
-              const change = updates.get(s.ticker);
-              const source = sources.get(s.ticker);
-              if (change == null) return s;
-              return {
-                ...s,
-                dailyChange: change,
-                dailyChangeSource: source ?? s.dailyChangeSource,
-              };
-            }),
-          };
-        })
-      );
-
-      setFetchTokens((prev) => ({ ...prev, [fundCode]: (prev[fundCode] ?? 0) + 1 }));
-
-      if (errors.length === 0) {
-        clearFundLastError(fundCode);
-      }
-
-      const failed = portfolio.stocks.length - updates.size;
-      if (failed > 0) {
-        setFetchErrors((prev) => ({
-          ...prev,
-          [fundCode]: `${updates.size} hisse güncellendi, ${failed} hisse başarısız. Hata detayına bakın.`,
-        }));
-      }
-    } catch (e) {
-      const message = formatErrorMessage(e);
-      setFundLastError(fundCode, message);
-      setFetchErrors((prev) => ({
-        ...prev,
-        [fundCode]: message,
-      }));
-    } finally {
-      setFetchingFunds((prev) => {
+      setLoadingFunds((prev) => {
         const next = new Set(prev);
         next.delete(fundCode);
         return next;
@@ -837,9 +741,8 @@ export default function ShadowPortfolio() {
           <div className="min-w-0 flex-1">
             <h3 className="text-sm font-bold text-slate-800">Günlük Tahmin Ekle</h3>
             <p className="mt-1 text-xs text-slate-500">
-              Bir fon kodu girin; hisse kompozisyonu (KAP dağılımı) Ekofin&apos;den otomatik
-              getirilir. Ardından kart başlığındaki &quot;Verileri Çek (İş Yatırım)&quot; ile günlük BIST
-              değişimlerini çekebilir, ağırlıkları dilediğiniz gibi düzenleyebilirsiniz.
+              Bir fon kodu girin; FVT&apos;den portföy dağılımı getirilir. Getiri % FVT&apos;den
+              gelir; eksik satırlar için İş Yatırım/TEFAS yedek kaynağı kullanılır.
             </p>
 
             <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -948,14 +851,12 @@ export default function ShadowPortfolio() {
               key={item.fundCode}
               item={item}
               normalize={normalize}
-              isFetching={fetchingFunds.has(item.fundCode)}
-              isImporting={importingFunds.has(item.fundCode)}
+              isLoading={loadingFunds.has(item.fundCode)}
               fetchToken={fetchTokens[item.fundCode] ?? 0}
               fetchError={fetchErrors[item.fundCode] ?? null}
               lastError={lastErrors[item.fundCode] ?? null}
               onClearLastError={() => clearFundLastError(item.fundCode)}
-              onImportComposition={(fundCode) => void handleImportComposition(fundCode)}
-              onFetchMarketData={(fundCode) => void handleFetchMarketData(fundCode)}
+              onRefreshPortfolio={(fundCode) => void handleFetchFvtPortfolio(fundCode)}
               onAddStock={addStock}
               onUpdateStock={updateStock}
               onRemoveStock={removeStock}
